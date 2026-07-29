@@ -2,8 +2,7 @@ export const profile = {
   firstName: 'Amy',
   lastName: 'Kuang',
   email: 'amy6kuang@gmail.com',
-  phone: '(951) 546-4767',
-  location: 'Riverside Area, CA',
+  location: 'Riverside, CA',
   timezone: 'America/Los_Angeles',
   timezoneLabel: 'PST',
   linkedin: 'https://www.linkedin.com/in/kuanga',
@@ -23,7 +22,7 @@ export const profile = {
 export const heroFacts = [
   'M.Eng · UC Irvine · 2027',
   'B.S. Mech E · Colorado School of Mines',
-  'Riverside Area, CA',
+  'Riverside, CA',
 ]
 
 /**

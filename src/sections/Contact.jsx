@@ -5,11 +5,6 @@ import { profile } from '../data/resume'
 const channels = [
   { label: 'Email', value: profile.email, href: `mailto:${profile.email}` },
   {
-    label: 'Phone',
-    value: profile.phone,
-    href: `tel:${profile.phone.replace(/[^\d+]/g, '')}`,
-  },
-  {
     label: 'LinkedIn',
     value: profile.linkedinLabel,
     href: profile.linkedin,
