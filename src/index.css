@@ -1,0 +1,226 @@
+@import 'tailwindcss';
+
+/* Max-width breakpoints from the design spec */
+@custom-variant mobile (@media (max-width: 809.98px));
+@custom-variant md-tablet (@media (min-width: 810px) and (max-width: 1199.98px));
+
+@theme {
+  --font-sans: 'Figtree', ui-sans-serif, system-ui, sans-serif;
+  --color-accent: #f598f2;
+}
+
+:root {
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --accent: #f598f2;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #000;
+  color: #fff;
+  font-family: 'Figtree', ui-sans-serif, system-ui, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Thin scrollbar so section pages don't break the black canvas */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.32);
+}
+
+/* ---------------------------------------------------------------- *
+ * Keyframes
+ * ---------------------------------------------------------------- */
+
+@keyframes videoFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes revealRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes revealFade {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dotPulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(1.45);
+  }
+}
+
+@keyframes labelIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------------------------------------------------------------- *
+ * Reveal utilities
+ * ---------------------------------------------------------------- */
+
+.reveal-up {
+  opacity: 0;
+}
+.reveal-up.is-visible {
+  animation: revealUp 0.9s var(--ease-spring) forwards;
+}
+
+.reveal-right {
+  opacity: 0;
+}
+.reveal-right.is-visible {
+  animation: revealRight 0.9s var(--ease-spring) forwards;
+}
+
+.reveal-fade {
+  opacity: 0;
+}
+.reveal-fade.is-visible {
+  animation: revealFade 0.75s var(--ease-spring) forwards;
+}
+
+.video-fade-in {
+  animation: videoFadeIn 1.2s ease-in-out;
+}
+
+.dot-pulse {
+  animation: dotPulse 1.6s ease-in-out infinite;
+}
+
+/* ---------------------------------------------------------------- *
+ * Link + button treatments
+ * ---------------------------------------------------------------- */
+
+.nav-link-underline {
+  position: relative;
+}
+.nav-link-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.45s var(--ease-spring);
+}
+.nav-link-underline:hover::after,
+.nav-link-underline[data-active='true']::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+.role-link {
+  transition: transform 0.45s var(--ease-spring), opacity 0.45s ease;
+}
+.role-link:hover {
+  transform: translateX(4px);
+}
+
+.fill-button {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition: color 0.45s var(--ease-spring),
+    border-color 0.45s var(--ease-spring);
+}
+.fill-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--accent);
+  transform: translateY(101%);
+  transition: transform 0.55s var(--ease-spring);
+}
+.fill-button:hover {
+  color: #000;
+  border-color: var(--accent);
+}
+.fill-button:hover::before {
+  transform: translateY(0);
+}
+
+/* ---------------------------------------------------------------- *
+ * Accessibility
+ * ---------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal-up,
+  .reveal-right,
+  .reveal-fade {
+    opacity: 1 !important;
+  }
+}

@@ -1,0 +1,93 @@
+import SectionShell from '../components/SectionShell'
+import Reveal from '../components/Reveal'
+import { profile } from '../data/resume'
+
+const channels = [
+  { label: 'Email', value: profile.email, href: `mailto:${profile.email}` },
+  {
+    label: 'Phone',
+    value: profile.phone,
+    href: `tel:${profile.phone.replace(/[^\d+]/g, '')}`,
+  },
+  {
+    label: 'LinkedIn',
+    value: profile.linkedinLabel,
+    href: profile.linkedin,
+    external: true,
+  },
+  { label: 'Based in', value: profile.location, href: null },
+]
+
+export default function Contact({ onNavigate }) {
+  return (
+    <SectionShell
+      id="contact"
+      eyebrow="Get in touch"
+      onNavigate={onNavigate}
+      kicker="Open to full-time mechanical and aerospace engineering roles, and to research collaborations in additive manufacturing and fluid systems."
+    >
+      <div className="grid grid-cols-12 gap-8 border-y border-white/15 py-12 md-tablet:gap-5 mobile:flex mobile:flex-col mobile:gap-8 mobile:py-10">
+        <div className="col-span-7 md-tablet:col-span-8">
+          <Reveal
+            as="p"
+            variant="up"
+            className="max-w-[560px] text-[32px] font-medium leading-[112%] tracking-[-1px] md-tablet:text-[26px] mobile:text-[24px] mobile:tracking-[-0.6px]"
+          >
+            Have a role, a project, or a problem worth solving
+            <span style={{ color: 'var(--accent)' }}>?</span> I'd like to hear
+            about it.
+          </Reveal>
+
+          <Reveal variant="up" delay={0.08} className="mt-10 flex flex-wrap gap-4">
+            <a
+              href={`mailto:${profile.email}`}
+              className="fill-button border border-white px-6 py-3 text-xs font-medium lowercase leading-4 tracking-[-0.12px]"
+            >
+              send an email
+            </a>
+            <a
+              href="/Amy-Kuang-Resume.docx"
+              download
+              className="fill-button border border-white/40 px-6 py-3 text-xs font-medium lowercase leading-4 tracking-[-0.12px]"
+            >
+              download résumé
+            </a>
+          </Reveal>
+        </div>
+
+        <div className="col-span-5 md-tablet:col-span-4">
+          <ul className="flex flex-col">
+            {channels.map((channel, i) => (
+              <Reveal
+                as="li"
+                key={channel.label}
+                variant="right"
+                delay={i * 0.06}
+                className="flex items-baseline justify-between gap-6 border-b border-white/15 py-4 first:border-t"
+              >
+                <span className="text-[8px] font-medium uppercase leading-3 tracking-[-0.08px] opacity-60">
+                  {channel.label}
+                </span>
+                {channel.href ? (
+                  <a
+                    href={channel.href}
+                    {...(channel.external
+                      ? { target: '_blank', rel: 'noreferrer noopener' }
+                      : {})}
+                    className="nav-link-underline text-sm font-medium leading-5 tracking-[-0.14px]"
+                  >
+                    {channel.value}
+                  </a>
+                ) : (
+                  <span className="text-sm font-medium leading-5 tracking-[-0.14px]">
+                    {channel.value}
+                  </span>
+                )}
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </SectionShell>
+  )
+}
