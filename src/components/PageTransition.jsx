@@ -29,10 +29,14 @@ export default function PageTransition({ phase, target }) {
       className="fixed inset-0 z-50"
       style={{ pointerEvents: active ? 'auto' : 'none' }}
     >
-      <div className="absolute inset-0 bg-white" style={panel(0)} />
+      {/* Dark panels: a full-bleed white/pink wipe was punishing to look at */}
       <div
         className="absolute inset-0"
-        style={{ background: 'var(--accent)', ...panel(STAGGER) }}
+        style={{ background: '#171717', ...panel(0) }}
+      />
+      <div
+        className="absolute inset-0"
+        style={{ background: '#000000', ...panel(STAGGER) }}
       />
 
       <div
@@ -44,8 +48,11 @@ export default function PageTransition({ phase, target }) {
             : 'opacity 140ms ease-in',
         }}
       >
-        <span className="flex items-start gap-3 text-black">
-          <span className="mt-3 text-xs font-medium uppercase leading-4 tracking-[-0.12px] md-tablet:mt-2 mobile:mt-1.5">
+        <span className="flex items-start gap-3 text-white">
+          <span
+            className="mt-3 text-xs font-medium uppercase leading-4 tracking-[-0.12px] md-tablet:mt-2 mobile:mt-1.5"
+            style={{ color: 'var(--accent)' }}
+          >
             {number}
           </span>
           <span
@@ -57,6 +64,7 @@ export default function PageTransition({ phase, target }) {
             }}
           >
             {label}
+            <span style={{ color: 'var(--accent)' }}>.</span>
           </span>
         </span>
       </div>

@@ -8,7 +8,7 @@ import Education from './sections/Education'
 import Projects from './sections/Projects'
 import Skills from './sections/Skills'
 import Contact from './sections/Contact'
-import { profile, sections } from './data/resume'
+import { focusAreas, profile, sections } from './data/resume'
 
 const VIEWS = {
   experience: Experience,
@@ -107,6 +107,10 @@ export default function App() {
     <div className="relative min-h-screen w-full">
       <VideoBackground
         activeIndex={activeIndex}
+        autoCycle={view === 'home'}
+        onCycle={() =>
+          setActiveIndex((current) => (current + 1) % focusAreas.length)
+        }
         overlay={view === 'home' ? 'bg-black/20' : 'bg-black/[0.88]'}
         scrim={view === 'home'}
         blur={view !== 'home'}
