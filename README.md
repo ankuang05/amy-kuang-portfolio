@@ -55,10 +55,42 @@ one video rather than downloading all three, which matters: the three files are 
 11.8 MB, and 7.4 MB. A newly attached clip is held back until it fires `canplay`, so the
 previous one stays on screen instead of flashing black.
 
+On the home page the clips run on a loop that never stops: when one ends the next is
+faded in, and after the last it wraps back to the first, rewinding it rather than leaving
+it frozen on its final frame. The next clip starts buffering 40% of the way through the
+current one so the handover doesn't stall, and clips that aren't on screen are paused once
+the crossfade finishes. Auto-cycling is disabled under `prefers-reduced-motion: reduce`,
+where the clips simply loop in place.
+
 Section pages blur and dim the same video so body copy stays readable.
 
 To swap in your own footage, replace the three URLs in `VIDEOS` and rename the matching
 entries in `focusAreas`.
+
+## Project images and links
+
+Each entry in `projects` (in `src/data/resume.js`) takes two optional extras:
+
+```js
+image: '/projects/ded-coupon.jpg',
+imageAlt: 'Cross-section of a stainless-steel coupon with an embedded thermocouple',
+links: [
+  { label: 'Final design report', href: 'https://…' },
+  { label: 'GitHub', href: 'https://…' },
+],
+```
+
+Drop the picture in `public/projects/` and reference it as `/projects/<file>`. Landscape
+crops around 1200×675 work best — the frame is 16:9 and `object-fit: cover`. Until an
+image is set, a numbered plate is drawn in its place, so the layout is already the right
+shape. `links` renders a row under the bullets; leave it `[]` to hide the row.
+
+Always fill in `imageAlt` when you set `image` — it is what screen readers announce.
+
+## Photo
+
+`public/amy-kuang.jpg` is the round portrait on the Contact page, referenced as
+`profile.photo`. Replace the file with another square image to change it.
 
 ## Résumé download
 

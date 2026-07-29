@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { VIDEOS } from '../data/resume'
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion'
 
@@ -6,6 +6,9 @@ const withAdded = (set, value) => (set.has(value) ? set : new Set(set).add(value
 
 /** Start buffering the next clip once the current one is this far through. */
 const PREFETCH_AT = 0.4
+
+/** Crossfade length. Must match the `duration-[1200ms]` class below. */
+const FADE_MS = 1200
 
 /**
  * Three looping clips stacked with an opacity crossfade.
@@ -15,6 +18,9 @@ const PREFETCH_AT = 0.4
  * needed; otherwise a clip is attached the first time someone selects it. A
  * newly attached clip is not faded in until it reports `canplay`, which keeps
  * the previous one on screen instead of flashing black.
+ *
+ * Cycling runs forever: after the last clip the sequence wraps to the first,
+ * which is rewound and replayed rather than left on its final frame.
  */
 export default function VideoBackground({
   activeIndex,
@@ -27,6 +33,7 @@ export default function VideoBackground({
   const [attached, setAttached] = useState(() => new Set([0]))
   const [ready, setReady] = useState(() => new Set())
   const [shown, setShown] = useState(0)
+  const els = useRef([])
 
   // An abrupt scene change is motion; honour the same preference the CSS does.
   const reducedMotion = usePrefersReducedMotion()
@@ -40,6 +47,27 @@ export default function VideoBackground({
     if (ready.has(activeIndex)) setShown(activeIndex)
   }, [activeIndex, ready])
 
+  // A clip that has already played through sits frozen on its last frame and
+  // will never fire `ended` again. Rewinding whichever clip is coming back on
+  // screen is what lets the sequence run 01 → 02 → 03 → 01 → … indefinitely.
+  useEffect(() => {
+    const el = els.current[shown]
+    if (!el || el.readyState < 1) return
+
+    el.currentTime = 0
+    el.play()?.catch(() => {})
+
+    // Let the outgoing clip keep moving until the crossfade is over, then stop
+    // it — decoding video nobody can see costs battery for nothing.
+    const id = setTimeout(() => {
+      els.current.forEach((other, i) => {
+        if (i !== shown) other?.pause()
+      })
+    }, FADE_MS)
+
+    return () => clearTimeout(id)
+  }, [shown])
+
   const prefetchNext = (i, el) => {
     if (!cycling || i !== shown || !el.duration) return
     if (el.currentTime / el.duration < PREFETCH_AT) return
@@ -51,13 +79,18 @@ export default function VideoBackground({
       {VIDEOS.map((src, i) => (
         <video
           key={i}
+          ref={(node) => {
+            els.current[i] = node
+          }}
           src={attached.has(i) ? src : undefined}
-          autoPlay
+          // Only the opening clip starts on its own; the rest buffer quietly
+          // and are played by the effect above when they come on screen.
+          autoPlay={i === 0}
           muted
           playsInline
           // While cycling, a clip must be allowed to end so it can hand over.
           loop={!cycling}
-          preload={i === 0 ? 'auto' : 'none'}
+          preload={attached.has(i) ? 'auto' : 'none'}
           aria-hidden="true"
           onCanPlay={() => setReady((prev) => withAdded(prev, i))}
           onTimeUpdate={(e) => prefetchNext(i, e.currentTarget)}

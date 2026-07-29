@@ -1,5 +1,5 @@
 import Reveal from './Reveal'
-import { focusAreas, profile } from '../data/resume'
+import { focusAreas, heroFacts, profile } from '../data/resume'
 
 export default function Hero({ activeIndex, onSelect, onNavigate }) {
   const accent = focusAreas[activeIndex].accent
@@ -89,7 +89,29 @@ export default function Hero({ activeIndex, onSelect, onNavigate }) {
               {profile.intro}
             </Reveal>
 
-            <Reveal variant="right" delay={0.08} threshold={0.35}>
+            {/* Degree, school, location — the scan a recruiter does first. */}
+            <Reveal
+              as="ul"
+              variant="right"
+              delay={0.06}
+              threshold={0.35}
+              aria-label="Credentials"
+              className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[10px] font-medium uppercase leading-4 tracking-[-0.1px] opacity-70"
+            >
+              {heroFacts.map((fact, i) => (
+                <li key={fact} className="flex items-center gap-3">
+                  {i > 0 ? (
+                    <span
+                      aria-hidden="true"
+                      className="block h-3 w-px bg-white/30"
+                    />
+                  ) : null}
+                  {fact}
+                </li>
+              ))}
+            </Reveal>
+
+            <Reveal variant="right" delay={0.12} threshold={0.35}>
               <button
                 type="button"
                 onClick={() => onNavigate('projects')}

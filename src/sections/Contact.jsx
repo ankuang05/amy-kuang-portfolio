@@ -28,9 +28,39 @@ export default function Contact({ onNavigate }) {
     >
       <div className="grid grid-cols-12 gap-8 border-y border-white/15 py-12 md-tablet:gap-5 mobile:flex mobile:flex-col mobile:gap-8 mobile:py-10">
         <div className="col-span-7 md-tablet:col-span-8">
+          <Reveal variant="up" className="mb-9 flex items-center gap-5 mobile:mb-7 mobile:gap-4">
+            <img
+              src={profile.photo}
+              alt={`${profile.firstName} ${profile.lastName}`}
+              width="112"
+              height="112"
+              className="h-28 w-28 shrink-0 rounded-full object-cover ring-1 ring-white/25 mobile:h-20 mobile:w-20"
+            />
+            <div>
+              <p className="text-lg font-medium uppercase leading-5 tracking-[-0.5px]">
+                {profile.firstName} {profile.lastName}
+              </p>
+              <p className="mt-2 text-xs font-medium uppercase leading-4 tracking-[-0.12px] opacity-65">
+                {profile.title}
+              </p>
+              <p className="mt-1 flex items-center gap-2 text-xs font-medium uppercase leading-4 tracking-[-0.12px] opacity-50">
+                <span
+                  className="dot-pulse block h-[6px] w-[6px] shrink-0 rounded-full"
+                  style={{
+                    background: 'var(--accent)',
+                    boxShadow: '0 0 10px 2px var(--accent)',
+                  }}
+                  aria-hidden="true"
+                />
+                {profile.availability}
+              </p>
+            </div>
+          </Reveal>
+
           <Reveal
             as="p"
             variant="up"
+            delay={0.06}
             className="max-w-[560px] text-[32px] font-medium leading-[112%] tracking-[-1px] md-tablet:text-[26px] mobile:text-[24px] mobile:tracking-[-0.6px]"
           >
             Have a role, a project, or a problem worth solving
@@ -38,7 +68,7 @@ export default function Contact({ onNavigate }) {
             about it.
           </Reveal>
 
-          <Reveal variant="up" delay={0.08} className="mt-10 flex flex-wrap gap-4">
+          <Reveal variant="up" delay={0.12} className="mt-10 flex flex-wrap gap-4">
             <a
               href={`mailto:${profile.email}`}
               className="fill-button border border-white px-6 py-3 text-xs font-medium lowercase leading-4 tracking-[-0.12px]"

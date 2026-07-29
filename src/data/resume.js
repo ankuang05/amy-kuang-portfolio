@@ -12,7 +12,42 @@ export const profile = {
   intro:
     'I design, analyze, and validate mechanical systems — from FEA-optimized structures and PID control loops to sensors embedded inside additively manufactured aerospace components.',
   availability: 'Available for work',
+  // Lives in public/. Swap the file to change the photo; keep it square.
+  photo: '/amy-kuang.jpg',
 }
+
+/**
+ * The one-line credential scan under the hero intro. Keep these short — they
+ * sit on a single wrapping row and are the first thing a recruiter reads.
+ */
+export const heroFacts = [
+  'M.Eng · UC Irvine · 2027',
+  'B.S. Mech E · Colorado School of Mines',
+  'Riverside Area, CA',
+]
+
+/**
+ * Headline numbers pulled from the Niagara Bottling internship. Shown at the
+ * top of the Experience page so the quantified results are read before the
+ * bullets that explain them.
+ */
+export const metrics = [
+  {
+    value: '420,800',
+    unit: 'bottles',
+    label: 'Added production capacity per peak period',
+  },
+  {
+    value: '12%',
+    unit: '17 → 15 min',
+    label: 'Faster pack changeover via SMED',
+  },
+  {
+    value: '0.139%',
+    unit: 'OEE',
+    label: 'Throughput efficiency gain',
+  },
+]
 
 /**
  * The three hero backgrounds, relabelled as focus areas.
@@ -83,9 +118,21 @@ export const experience = [
   },
 ]
 
+/**
+ * Every project takes an optional `image` and any number of `links`.
+ *
+ *   image     — path to a file in public/projects/ (e.g. '/projects/ded.jpg').
+ *               Leave '' and a numbered placeholder plate is drawn instead.
+ *   imageAlt  — describe what the picture shows; required whenever image is set.
+ *   links     — [{ label, href }]. Reports, repos, papers, videos. Leave [] to
+ *               hide the row entirely.
+ */
 export const projects = [
   {
     title: 'Embedded Electronics in Additively Manufactured Components',
+    image: '',
+    imageAlt: '',
+    links: [],
     period: 'Aug 2025 – May 2026',
     context: 'Senior Capstone Research Project',
     sponsor: 'Sponsor: Honeywell International, Inc. · Colorado School of Mines',
@@ -99,6 +146,9 @@ export const projects = [
   },
   {
     title: 'Powder Flow Characterization for Electrodynamic DED Feeders',
+    image: '',
+    imageAlt: '',
+    links: [],
     period: 'Jan 2026 – May 2026',
     context: 'Graduate Research Project — AMFG 501: Additive Manufacturing',
     sponsor: 'Colorado School of Mines',
@@ -112,6 +162,9 @@ export const projects = [
   },
   {
     title: 'Finite Element Analysis of a Double Wishbone Suspension System',
+    image: '',
+    imageAlt: '',
+    links: [],
     period: 'December 2024',
     context: 'Structural optimization study',
     sponsor: '',
@@ -124,6 +177,9 @@ export const projects = [
   },
   {
     title: 'PID-Controlled Easy Bake Oven',
+    image: '',
+    imageAlt: '',
+    links: [],
     period: 'Nov 2024 – Dec 2024',
     context: 'Closed-loop electro-mechanical control system',
     sponsor: '',
