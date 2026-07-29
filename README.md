@@ -46,9 +46,16 @@ Timing lives in `src/components/PageTransition.jsx` (`PANEL_MS`, `STAGGER`) and
 ## Background video
 
 Three looping clips are defined in `VIDEOS` in `src/data/resume.js` and labelled as focus
-areas (`focusAreas`) in the hero switcher. They're fetched as blobs on load so switching is
-instant, falling back to streaming if a fetch fails. Section pages blur and dim the same
-video so body copy stays readable.
+areas (`focusAreas`) in the hero switcher. They are hosted on CloudFront, not in this repo,
+so they cost nothing against the host's bandwidth.
+
+Only the first clip is given a `src` on load — the other two are attached the first time
+someone selects them (see `src/components/VideoBackground.jsx`). A visit therefore streams
+one video rather than downloading all three, which matters: the three files are 17.9 MB,
+11.8 MB, and 7.4 MB. A newly attached clip is held back until it fires `canplay`, so the
+previous one stays on screen instead of flashing black.
+
+Section pages blur and dim the same video so body copy stays readable.
 
 To swap in your own footage, replace the three URLs in `VIDEOS` and rename the matching
 entries in `focusAreas`.

@@ -1,10 +1,15 @@
 import { useEffect, useState } from 'react'
 import { VIDEOS } from '../data/resume'
 
+const withAdded = (set, value) => (set.has(value) ? set : new Set(set).add(value))
+
 /**
- * Three looping videos stacked with an opacity crossfade.
- * All sources are fetched as blobs up front so switching is instant;
- * any that fail fall back to streaming from the original URL.
+ * Three looping clips stacked with an opacity crossfade.
+ *
+ * Only the first clip is given a src on load; the others are attached the first
+ * time someone selects them, so a visit costs one streaming video rather than
+ * all three up front. A newly attached clip is not faded in until it reports
+ * `canplay`, which keeps the previous one on screen instead of flashing black.
  */
 export default function VideoBackground({
   activeIndex,
@@ -12,55 +17,37 @@ export default function VideoBackground({
   scrim = false,
   blur = false,
 }) {
-  const [sources, setSources] = useState(VIDEOS)
+  const [attached, setAttached] = useState(() => new Set([0]))
+  const [ready, setReady] = useState(() => new Set())
+  const [shown, setShown] = useState(0)
 
   useEffect(() => {
-    let cancelled = false
-    const created = []
+    setAttached((prev) => withAdded(prev, activeIndex))
+  }, [activeIndex])
 
-    Promise.all(
-      VIDEOS.map(async (url) => {
-        try {
-          const res = await fetch(url)
-          if (!res.ok) throw new Error(`HTTP ${res.status}`)
-          const objectUrl = URL.createObjectURL(await res.blob())
-          created.push(objectUrl)
-          return objectUrl
-        } catch {
-          return url
-        }
-      })
-    ).then((resolved) => {
-      if (cancelled) {
-        created.forEach(URL.revokeObjectURL)
-        return
-      }
-      setSources(resolved)
-    })
-
-    return () => {
-      cancelled = true
-      created.forEach(URL.revokeObjectURL)
-    }
-  }, [])
+  useEffect(() => {
+    if (ready.has(activeIndex)) setShown(activeIndex)
+  }, [activeIndex, ready])
 
   return (
     <div className="fixed inset-0 z-0" aria-hidden="true">
-      {sources.map((src, i) => (
+      {VIDEOS.map((src, i) => (
         <video
           key={i}
-          src={src}
+          src={attached.has(i) ? src : undefined}
           autoPlay
           muted
           loop
           playsInline
-          preload="auto"
+          preload={i === 0 ? 'auto' : 'none'}
           aria-hidden="true"
+          onCanPlay={() => setReady((prev) => withAdded(prev, i))}
           className={`absolute inset-0 h-full w-full object-cover transition-[opacity,filter,transform] duration-[1200ms] ease-in-out ${
-            i === activeIndex ? 'opacity-100' : 'opacity-0'
+            i === shown ? 'opacity-100' : 'opacity-0'
           } ${blur ? 'scale-110 blur-[10px]' : 'scale-100 blur-0'}`}
         />
       ))}
+
       <div className={`absolute inset-0 z-[1] ${overlay}`} />
 
       {/* Keeps white type legible over bright footage without flattening it */}
