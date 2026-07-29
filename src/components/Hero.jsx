@@ -100,10 +100,12 @@ export default function Hero({ activeIndex, onSelect, onNavigate }) {
             >
               {heroFacts.map((fact, i) => (
                 <li key={fact} className="flex items-center gap-3">
+                  {/* The list stacks one-per-line on mobile, where a leading
+                      divider would just hang off the front of each row. */}
                   {i > 0 ? (
                     <span
                       aria-hidden="true"
-                      className="block h-3 w-px bg-white/30"
+                      className="block h-3 w-px bg-white/30 mobile:hidden"
                     />
                   ) : null}
                   {fact}
