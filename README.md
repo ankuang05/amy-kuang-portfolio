@@ -94,8 +94,12 @@ Always fill in `imageAlt` when you set `image` — it is what screen readers ann
 
 ## Résumé download
 
-`public/Amy-Kuang-Resume.docx` is served at `/Amy-Kuang-Resume.docx` and linked from the
-Contact page. Replace that file whenever the résumé is updated.
+`public/Amy-Kuang-Resume.pdf` is served at `/Amy-Kuang-Resume.pdf` and linked from the
+Contact page. Replace that file whenever the résumé is updated — PDF rather than `.docx`
+so it renders the same everywhere and can't be edited by whoever downloads it.
+
+When the résumé changes, check whether `src/data/resume.js` needs the same edit: the page
+content and the downloadable file are maintained separately, and a recruiter reads both.
 
 ## Notes
 

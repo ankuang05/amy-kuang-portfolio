@@ -71,7 +71,7 @@ export default function Contact({ onNavigate }) {
               send an email
             </a>
             <a
-              href="/Amy-Kuang-Resume.docx"
+              href="/Amy-Kuang-Resume.pdf"
               download
               className="fill-button border border-white/40 px-6 py-3 text-xs font-medium lowercase leading-4 tracking-[-0.12px]"
             >

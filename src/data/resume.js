@@ -79,34 +79,32 @@ export const education = [
     degree: 'Bachelor of Science, Mechanical Engineering',
     period: 'B.S. May 2026',
     location: 'Golden, CO',
-    details: [
-      { label: 'Focus', value: 'Manufacturing' },
-      { label: 'GPA', value: '3.0' },
-    ],
+    details: [{ label: 'Focus', value: 'Manufacturing' }],
   },
 ]
 
 export const experience = [
   {
     company: 'CAM Supply Inc.',
-    role: 'Design Engineering Intern',
+    role: 'Engineering Intern',
     location: 'Lake Elsinore, CA',
-    // Update this string if the range changes.
-    period: 'May 2026 – Present',
+    // Update this string if the range changes. `current` drives the pulsing
+    // "Current" tag, so clear it once the end date has passed.
+    period: 'May 2026 – September 2026',
     current: true,
     bullets: [
       'Designed and fabricated supporting parts for tattoo pens and acupuncture products via 3D printing (SolidWorks / IdeaMaker).',
       'Generated engineering drawings with dimensions, tolerances, and manufacturing specifications to support production and quality control.',
       'Reviewed and updated product documentation to maintain compliance with regulatory and quality requirements, including FDA product records.',
       'Conducted cost-benefit analyses of U.S. and Chinese manufacturing partners, evaluating labor, material, logistics, and production costs to support sourcing decisions.',
+      'Produced user guides, brochures, and marketing materials in CorelDraw to support product documentation.',
     ],
   },
   {
     company: 'Niagara Bottling LLC.',
     role: 'Manufacturing Engineer Intern',
     location: 'Denver, CO',
-    // NOTE: the resume does not list dates for this role — add them here.
-    period: '',
+    period: 'May 2025 – August 2025',
     current: false,
     bullets: [
       'Improved production capacity by 420,800 bottles per peak production period by analyzing pack changeover operations and improving process efficiency.',
