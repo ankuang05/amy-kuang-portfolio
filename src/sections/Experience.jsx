@@ -5,21 +5,26 @@ import { experience } from '../data/resume'
  * A role's quantified results, sitting under its own bullets rather than in a
  * banner of their own — each number is read next to the work that produced it.
  * The row already animates in as one block, so these need no reveal of their own.
+ *
+ * Type is sized so the caption stays on a single line: the longest one needs
+ * ~188px at 10px, and the narrowest desktop tile is ~207px. Below the desktop
+ * range three columns can't hold that, so the grid drops to one full-width
+ * column rather than letting the captions wrap.
  */
 function Results({ items }) {
   return (
-    <ul className="mt-8 grid grid-cols-3 gap-6 md-tablet:gap-4 mobile:grid-cols-1 mobile:gap-5">
+    <ul className="mt-8 grid grid-cols-3 gap-6 md-tablet:grid-cols-1 md-tablet:gap-5 mobile:grid-cols-1 mobile:gap-5">
       {items.map((metric) => (
         <li key={metric.label} className="border-t border-white/15 pt-4">
           <p className="flex items-baseline gap-2">
-            <span className="text-[clamp(26px,2.6vw,34px)] font-medium leading-[0.9] tracking-[-0.035em]">
+            <span className="text-[clamp(22px,2.2vw,28px)] font-medium leading-[0.9] tracking-[-0.035em]">
               {metric.value}
             </span>
             <span className="text-[10px] font-medium uppercase leading-3 tracking-[-0.1px] opacity-55">
               {metric.unit}
             </span>
           </p>
-          <p className="mt-2.5 text-xs font-medium leading-4 tracking-[-0.12px] opacity-65">
+          <p className="mt-2 text-[10px] font-medium leading-3 tracking-[-0.1px] opacity-65">
             {metric.label}
           </p>
         </li>
