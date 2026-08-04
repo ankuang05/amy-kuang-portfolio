@@ -14,8 +14,10 @@ export const profile = {
 }
 
 /**
- * The hero bio. Every line opens with a phrase set in bold, so the two halves
- * are stored apart rather than marked up inside one string.
+ * The hero bio. `greeting` is the headline set across the landing screen; the
+ * exclamation mark inside it is drawn in the accent colour. Every line below
+ * opens with a phrase set in bold, so the two halves are stored apart rather
+ * than marked up inside one string.
  */
 export const bio = {
   greeting: "Hi! I'm Amy",

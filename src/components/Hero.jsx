@@ -1,7 +1,12 @@
 import Reveal from './Reveal'
-import { bio, heroFacts, profile } from '../data/resume'
+import { bio, heroFacts } from '../data/resume'
 
 export default function Hero({ onNavigate }) {
+  // The exclamation mark carries the accent colour, doing the job the pink full
+  // stop does on every section title.
+  const [greetingHead, ...rest] = bio.greeting.split('!')
+  const greetingTail = rest.join('!')
+
   return (
     <main className="relative z-[2] h-screen w-full">
       <div className="mx-auto flex h-full w-full max-w-[1340px] flex-col items-end justify-end px-[15px] pt-[190px] md-tablet:px-[18px] md-tablet:pt-[150px] mobile:items-start mobile:px-[18px] mobile:pt-[140px]">
@@ -15,13 +20,13 @@ export default function Hero({ onNavigate }) {
               as="h1"
               variant="up"
               threshold={0.35}
-              className="text-[clamp(140px,15vw,240px)] font-medium uppercase leading-[81%] tracking-[-8px] md-tablet:text-[129.6px] md-tablet:leading-[113.4px] md-tablet:tracking-[-7.7px] mobile:text-[clamp(68px,21vw,80px)] mobile:leading-[96px] mobile:tracking-[-4.8px]"
+              className="text-[clamp(64px,10.5vw,160px)] font-medium uppercase leading-[0.86] tracking-[-0.045em]"
             >
-              {profile.firstName}
-              {/* Pinned to the brand pink. It used to track the active focus
-                  area, but with the switcher gone a colour that changes on its
-                  own just reads as a glitch. */}
-              <span style={{ color: 'var(--accent)' }}>.</span>
+              {greetingHead}
+              {greetingTail ? (
+                <span style={{ color: 'var(--accent)' }}>!</span>
+              ) : null}
+              {greetingTail}
             </Reveal>
           </div>
 
@@ -29,23 +34,16 @@ export default function Hero({ onNavigate }) {
             <Reveal
               variant="right"
               threshold={0.35}
-              className="mobile:max-w-[420px]"
+              className="flex flex-col gap-2.5 mobile:max-w-[420px]"
             >
-              <p className="text-lg font-semibold uppercase leading-5 tracking-[-0.5px]">
-                {bio.greeting}
-              </p>
-
-              <div className="mt-4 flex flex-col gap-2.5">
-                {bio.lines.map((line) => (
-                  <p
-                    key={line.lead}
-                    className="text-base font-medium leading-6 tracking-[-0.16px]"
-                  >
-                    <strong className="font-bold">{line.lead}</strong>{' '}
-                    {line.rest}
-                  </p>
-                ))}
-              </div>
+              {bio.lines.map((line) => (
+                <p
+                  key={line.lead}
+                  className="text-base font-medium leading-6 tracking-[-0.16px]"
+                >
+                  <strong className="font-bold">{line.lead}</strong> {line.rest}
+                </p>
+              ))}
             </Reveal>
 
             {/* Degree, school, location — the scan a recruiter does first. */}
