@@ -2,31 +2,24 @@ import SectionShell, { Bullets, EntryRow, Meta } from '../components/SectionShel
 import { experience } from '../data/resume'
 
 /**
- * A role's quantified results, sitting under its own bullets rather than in a
- * banner of their own — each number is read next to the work that produced it.
- * The row already animates in as one block, so these need no reveal of their own.
+ * A role's quantified results, read as one line under its own bullets. Each
+ * number carries only its unit — the bullets directly above already say what
+ * it measures, so a caption here would repeat them.
  *
- * Type is sized so the caption stays on a single line: the longest one needs
- * ~188px at 10px, and the narrowest desktop tile is ~207px. Below the desktop
- * range three columns can't hold that, so the grid drops to one full-width
- * column rather than letting the captions wrap.
+ * `flex-wrap` is insurance for phone widths, where three figures can't share
+ * a line; everything from tablet up holds on one.
  */
 function Results({ items }) {
   return (
-    <ul className="mt-8 grid grid-cols-3 gap-6 md-tablet:grid-cols-1 md-tablet:gap-5 mobile:grid-cols-1 mobile:gap-5">
+    <ul className="mt-8 flex flex-wrap items-baseline gap-x-10 gap-y-3 border-t border-white/15 pt-4 md-tablet:gap-x-8 mobile:gap-x-6">
       {items.map((metric) => (
-        <li key={metric.label} className="border-t border-white/15 pt-4">
-          <p className="flex items-baseline gap-2">
-            <span className="text-[clamp(22px,2.2vw,28px)] font-medium leading-[0.9] tracking-[-0.035em]">
-              {metric.value}
-            </span>
-            <span className="text-[10px] font-medium uppercase leading-3 tracking-[-0.1px] opacity-55">
-              {metric.unit}
-            </span>
-          </p>
-          <p className="mt-2 text-[10px] font-medium leading-3 tracking-[-0.1px] opacity-65">
-            {metric.label}
-          </p>
+        <li key={metric.value} className="flex items-baseline gap-2">
+          <span className="text-[clamp(22px,2.2vw,28px)] font-medium leading-[0.9] tracking-[-0.035em]">
+            {metric.value}
+          </span>
+          <span className="text-[10px] font-medium uppercase leading-3 tracking-[-0.1px] opacity-55">
+            {metric.unit}
+          </span>
         </li>
       ))}
     </ul>

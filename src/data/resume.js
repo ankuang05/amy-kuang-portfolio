@@ -92,24 +92,13 @@ export const experience = [
       'Standardized MES fault codes and implemented automated aggregate unit tracking to support Root Cause Corrective Action (RCCA) investigations.',
       'Collaborated with maintenance, production, and quality teams to troubleshoot line inefficiencies and improve overall operations; developed SOPs for line improvement and factory equipment to improve repeatability.',
     ],
-    // Quantified results, shown under this role's bullets. Any job can carry
-    // them; leave the key off and nothing is rendered.
+    // Quantified results, shown as one line under this role's bullets. Any job
+    // can carry them; leave the key off and nothing is rendered. Keep `unit`
+    // short — the three pairs share a single line.
     metrics: [
-      {
-        value: '420,800',
-        unit: 'bottles',
-        label: 'Added production capacity per peak period',
-      },
-      {
-        value: '12%',
-        unit: '17 → 15 min',
-        label: 'Faster pack changeover via SMED',
-      },
-      {
-        value: '0.139%',
-        unit: 'OEE',
-        label: 'Throughput efficiency gain',
-      },
+      { value: '420,800', unit: 'bottles' },
+      { value: '12%', unit: '17 → 15 min' },
+      { value: '0.139%', unit: 'OEE' },
     ],
   },
 ]
