@@ -8,15 +8,35 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/kuanga',
   linkedinLabel: 'linkedin.com/in/kuanga',
   title: 'Mechanical & Aerospace Engineer',
-  intro:
-    'I design, analyze, and validate mechanical systems — from FEA-optimized structures and PID control loops to sensors embedded inside additively manufactured aerospace components.',
   availability: 'Available for work',
   // Lives in public/. Swap the file to change the photo; keep it square.
   photo: '/amy-kuang.jpg',
 }
 
 /**
- * The one-line credential scan under the hero intro. Keep these short — they
+ * The hero bio. Every line opens with a phrase set in bold, so the two halves
+ * are stored apart rather than marked up inside one string.
+ */
+export const bio = {
+  greeting: "Hi! I'm Amy",
+  lines: [
+    {
+      lead: 'Studied',
+      rest: 'Mechanical Engineering at Colorado School of Mines & Aerospace Engineering at UC Irvine',
+    },
+    {
+      lead: 'Curious',
+      rest: 'About Manufacturing, Aerospace Systems & Product Development',
+    },
+    {
+      lead: 'Career Background',
+      rest: 'Includes Experience in Manufacturing Engineering, Additive Manufacturing & Mechanical Design',
+    },
+  ],
+}
+
+/**
+ * The one-line credential scan under the hero bio. Keep these short — they
  * sit on a single wrapping row and are the first thing a recruiter reads.
  */
 export const heroFacts = [

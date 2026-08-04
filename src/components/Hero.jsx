@@ -1,5 +1,5 @@
 import Reveal from './Reveal'
-import { heroFacts, profile } from '../data/resume'
+import { bio, heroFacts, profile } from '../data/resume'
 
 export default function Hero({ onNavigate }) {
   return (
@@ -27,12 +27,25 @@ export default function Hero({ onNavigate }) {
 
           <div className="flex flex-1 flex-col items-start gap-6 pl-[50px] md-tablet:pl-6 mobile:pl-0">
             <Reveal
-              as="p"
               variant="right"
               threshold={0.35}
-              className="text-base font-medium leading-6 tracking-[-0.16px] mobile:max-w-[420px]"
+              className="mobile:max-w-[420px]"
             >
-              {profile.intro}
+              <p className="text-lg font-semibold uppercase leading-5 tracking-[-0.5px]">
+                {bio.greeting}
+              </p>
+
+              <div className="mt-4 flex flex-col gap-2.5">
+                {bio.lines.map((line) => (
+                  <p
+                    key={line.lead}
+                    className="text-base font-medium leading-6 tracking-[-0.16px]"
+                  >
+                    <strong className="font-bold">{line.lead}</strong>{' '}
+                    {line.rest}
+                  </p>
+                ))}
+              </div>
             </Reveal>
 
             {/* Degree, school, location — the scan a recruiter does first. */}
