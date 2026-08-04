@@ -5,13 +5,16 @@ import { experience } from '../data/resume'
  * A role's quantified results, read as one row under its own bullets — each
  * number next to the work that produced it, with its caption beneath.
  *
- * The three stay side by side down to the tablet floor, where the columns are
- * ~159px wide; at 10px a caption of about thirty characters still holds one
- * line there. Only phones stack, having no room for three of anything.
+ * The columns follow the space actually available rather than the viewport:
+ * under the `mobile` breakpoint this row is full-width (756px at an 800px
+ * window), so a viewport rule would stack three figures that comfortably fit
+ * side by side. `auto-fit` keeps all three on one line wherever they fit —
+ * down to ~500px, which covers the narrowest tablet column at ~159px each —
+ * and only drops one down on a phone.
  */
 function Results({ items }) {
   return (
-    <ul className="mt-8 grid grid-cols-3 gap-6 md-tablet:gap-4 mobile:grid-cols-1 mobile:gap-5">
+    <ul className="mt-8 grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-6 md-tablet:gap-4 mobile:gap-5">
       {items.map((metric) => (
         <li key={metric.value} className="border-t border-white/15 pt-4">
           <p className="flex items-baseline gap-2">
