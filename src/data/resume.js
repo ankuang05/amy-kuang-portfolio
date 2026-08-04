@@ -38,16 +38,6 @@ export const bio = {
 }
 
 /**
- * The one-line credential scan under the hero bio. Keep these short — they
- * sit on a single wrapping row and are the first thing a recruiter reads.
- */
-export const heroFacts = [
-  'M.Eng · UC Irvine · 2027',
-  'B.S. Mech E · Colorado School of Mines',
-  'Riverside, CA',
-]
-
-/**
  * Headline numbers pulled from the Niagara Bottling internship. Shown at the
  * top of the Experience page so the quantified results are read before the
  * bullets that explain them.
