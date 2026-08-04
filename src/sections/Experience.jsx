@@ -2,24 +2,29 @@ import SectionShell, { Bullets, EntryRow, Meta } from '../components/SectionShel
 import { experience } from '../data/resume'
 
 /**
- * A role's quantified results, read as one line under its own bullets. Each
- * number carries only its unit — the bullets directly above already say what
- * it measures, so a caption here would repeat them.
+ * A role's quantified results, read as one row under its own bullets — each
+ * number next to the work that produced it, with its caption beneath.
  *
- * `flex-wrap` is insurance for phone widths, where three figures can't share
- * a line; everything from tablet up holds on one.
+ * The three stay side by side down to the tablet floor, where the columns are
+ * ~159px wide; at 10px a caption of about thirty characters still holds one
+ * line there. Only phones stack, having no room for three of anything.
  */
 function Results({ items }) {
   return (
-    <ul className="mt-8 flex flex-wrap items-baseline gap-x-10 gap-y-3 border-t border-white/15 pt-4 md-tablet:gap-x-8 mobile:gap-x-6">
+    <ul className="mt-8 grid grid-cols-3 gap-6 md-tablet:gap-4 mobile:grid-cols-1 mobile:gap-5">
       {items.map((metric) => (
-        <li key={metric.value} className="flex items-baseline gap-2">
-          <span className="text-[clamp(22px,2.2vw,28px)] font-medium leading-[0.9] tracking-[-0.035em]">
-            {metric.value}
-          </span>
-          <span className="text-[10px] font-medium uppercase leading-3 tracking-[-0.1px] opacity-55">
-            {metric.unit}
-          </span>
+        <li key={metric.value} className="border-t border-white/15 pt-4">
+          <p className="flex items-baseline gap-2">
+            <span className="text-[clamp(22px,2.2vw,28px)] font-medium leading-[0.9] tracking-[-0.035em]">
+              {metric.value}
+            </span>
+            <span className="text-[10px] font-medium uppercase leading-3 tracking-[-0.1px] opacity-55">
+              {metric.unit}
+            </span>
+          </p>
+          <p className="mt-2 text-[10px] font-medium leading-3 tracking-[-0.1px] opacity-65">
+            {metric.label}
+          </p>
         </li>
       ))}
     </ul>
