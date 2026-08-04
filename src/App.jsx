@@ -8,7 +8,7 @@ import Education from './sections/Education'
 import Projects from './sections/Projects'
 import Skills from './sections/Skills'
 import Contact from './sections/Contact'
-import { focusAreas, profile, sections } from './data/resume'
+import { profile, sections, VIDEOS } from './data/resume'
 
 const VIEWS = {
   experience: Experience,
@@ -109,7 +109,7 @@ export default function App() {
         activeIndex={activeIndex}
         autoCycle={view === 'home'}
         onCycle={() =>
-          setActiveIndex((current) => (current + 1) % focusAreas.length)
+          setActiveIndex((current) => (current + 1) % VIDEOS.length)
         }
         overlay={view === 'home' ? 'bg-black/20' : 'bg-black/[0.88]'}
         scrim={view === 'home'}
@@ -119,11 +119,7 @@ export default function App() {
       <Navbar view={view} onNavigate={navigate} scrolled={scrolled} />
 
       {view === 'home' ? (
-        <Hero
-          activeIndex={activeIndex}
-          onSelect={setActiveIndex}
-          onNavigate={navigate}
-        />
+        <Hero onNavigate={navigate} />
       ) : (
         <Section onNavigate={navigate} />
       )}

@@ -48,16 +48,7 @@ export const metrics = [
   },
 ]
 
-/**
- * The three hero backgrounds, relabelled as focus areas.
- * Each index maps 1:1 to a video in VIDEOS below.
- */
-export const focusAreas = [
-  { label: 'Fluid Dynamics', accent: '#F598F2' },
-  { label: 'Additive Mfg', accent: '#FFFFFF' },
-  { label: 'Control Systems', accent: '#FFFFFF' },
-]
-
+/** Hero backgrounds, played in order and looped forever. */
 export const VIDEOS = [
   'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260629_030107_874273ea-684a-4e90-bb96-8fdfde48d53d.mp4',
   'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260629_032424_3c9c2a9d-807b-4482-80e6-dd6d9dfd4545.mp4',

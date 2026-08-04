@@ -1,63 +1,10 @@
 import Reveal from './Reveal'
-import { focusAreas, heroFacts, profile } from '../data/resume'
+import { heroFacts, profile } from '../data/resume'
 
-export default function Hero({ activeIndex, onSelect, onNavigate }) {
-  const accent = focusAreas[activeIndex].accent
-
+export default function Hero({ onNavigate }) {
   return (
     <main className="relative z-[2] h-screen w-full">
-      <div className="mx-auto flex h-full w-full max-w-[1340px] flex-col items-end justify-end gap-[150px] px-[15px] pt-[190px] md-tablet:gap-[100px] md-tablet:px-[18px] md-tablet:pt-[150px] mobile:items-start mobile:gap-[72px] mobile:px-[18px] mobile:pt-[140px]">
-        {/* Focus-area switcher + availability */}
-        <section
-          aria-label="Focus areas"
-          className="flex w-full items-end mobile:flex-col mobile:items-start mobile:gap-7"
-        >
-          <div className="flex-[4]">
-            <ul className="flex flex-col gap-1.5">
-              {focusAreas.map((area, i) => {
-                const active = i === activeIndex
-                return (
-                  <li key={area.label}>
-                    <button
-                      type="button"
-                      onClick={() => onSelect(i)}
-                      aria-label={`${area.label} background`}
-                      aria-pressed={active}
-                      className={`role-link flex items-start gap-1.5 ${
-                        active ? 'opacity-100' : 'opacity-55 hover:opacity-75'
-                      }`}
-                    >
-                      <span className="mt-[1px] text-[8px] font-medium uppercase leading-3 tracking-[-0.08px]">
-                        {String(i + 1).padStart(2, '0')}
-                      </span>
-                      <span className="text-xs font-medium uppercase leading-4 tracking-[-0.12px]">
-                        {area.label}
-                      </span>
-                    </button>
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
-
-          <div className="flex flex-1 items-center gap-2.5">
-            <span
-              className="dot-pulse block h-[7px] w-[7px] shrink-0 rounded-full"
-              style={{
-                background: accent,
-                boxShadow: `0 0 12px 2px ${accent}`,
-              }}
-              aria-hidden="true"
-            />
-            <span
-              role="status"
-              className="text-xs font-medium uppercase leading-4 tracking-[-0.12px]"
-            >
-              {profile.availability}
-            </span>
-          </div>
-        </section>
-
+      <div className="mx-auto flex h-full w-full max-w-[1340px] flex-col items-end justify-end px-[15px] pt-[190px] md-tablet:px-[18px] md-tablet:pt-[150px] mobile:items-start mobile:px-[18px] mobile:pt-[140px]">
         {/* Name + intro + CTA */}
         <section
           aria-label="Introduction"
@@ -71,11 +18,10 @@ export default function Hero({ activeIndex, onSelect, onNavigate }) {
               className="text-[clamp(140px,15vw,240px)] font-medium uppercase leading-[81%] tracking-[-8px] md-tablet:text-[129.6px] md-tablet:leading-[113.4px] md-tablet:tracking-[-7.7px] mobile:text-[clamp(68px,21vw,80px)] mobile:leading-[96px] mobile:tracking-[-4.8px]"
             >
               {profile.firstName}
-              <span
-                style={{ color: accent, transition: 'color 900ms ease-in-out' }}
-              >
-                .
-              </span>
+              {/* Pinned to the brand pink. It used to track the active focus
+                  area, but with the switcher gone a colour that changes on its
+                  own just reads as a glitch. */}
+              <span style={{ color: 'var(--accent)' }}>.</span>
             </Reveal>
           </div>
 
