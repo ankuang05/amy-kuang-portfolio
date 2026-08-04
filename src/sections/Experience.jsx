@@ -35,13 +35,10 @@ function Results({ items }) {
 }
 
 export default function Experience({ onNavigate }) {
+  // No kicker: the roles speak for themselves. SectionShell drops the column
+  // entirely when one isn't given.
   return (
-    <SectionShell
-      id="experience"
-      eyebrow="Internships"
-      onNavigate={onNavigate}
-      kicker="Manufacturing and design roles where the work had to hold up on a real production line — changeover time, tolerances, compliance records, and sourcing decisions."
-    >
+    <SectionShell id="experience" eyebrow="Internships" onNavigate={onNavigate}>
       <div className="border-b border-white/15">
         {experience.map((job, i) => (
           <EntryRow
