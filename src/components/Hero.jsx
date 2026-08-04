@@ -1,7 +1,7 @@
 import Reveal from './Reveal'
-import { bio } from '../data/resume'
+import { bio, profile } from '../data/resume'
 
-export default function Hero({ onNavigate }) {
+export default function Hero() {
   // The exclamation mark carries the accent colour, doing the job the pink full
   // stop does on every section title.
   const [greetingHead, ...rest] = bio.greeting.split('!')
@@ -47,13 +47,14 @@ export default function Hero({ onNavigate }) {
             </Reveal>
 
             <Reveal variant="right" delay={0.06} threshold={0.35}>
-              <button
-                type="button"
-                onClick={() => onNavigate('projects')}
-                className="fill-button border border-white px-6 py-3 text-xs font-medium lowercase leading-4 tracking-[-0.12px]"
+              <a
+                href={`mailto:${profile.email}`}
+                className="fill-button inline-flex items-center gap-2 border border-white px-6 py-3 text-xs font-medium leading-4 tracking-[-0.12px]"
               >
-                view my work
-              </button>
+                Get In Touch
+                {/* Decorative — the link text already says where it goes. */}
+                <span aria-hidden="true">→</span>
+              </a>
             </Reveal>
           </div>
         </section>

@@ -119,7 +119,7 @@ export default function App() {
       <Navbar view={view} onNavigate={navigate} scrolled={scrolled} />
 
       {view === 'home' ? (
-        <Hero onNavigate={navigate} />
+        <Hero />
       ) : (
         <Section onNavigate={navigate} />
       )}

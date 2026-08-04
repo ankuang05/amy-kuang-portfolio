@@ -22,7 +22,7 @@ The output in `dist/` is fully static — drop it on Netlify, Vercel, GitHub Pag
 | --- | --- |
 | `src/data/resume.js` | **All content.** Every heading, bullet, date, skill, and link lives here. |
 | `src/App.jsx` | View switching + the page-transition state machine. |
-| `src/components/Hero.jsx` | Landing screen: name, bio, credentials, CTA. |
+| `src/components/Hero.jsx` | Landing screen: name, bio, email CTA. |
 | `src/components/Navbar.jsx` | Fixed nav, local clock, mobile menu. |
 | `src/components/PageTransition.jsx` | The wipe panels shown between sections. |
 | `src/components/SectionShell.jsx` | Shared layout for every section page (`EntryRow`, `Bullets`, `Meta`). |
