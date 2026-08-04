@@ -86,7 +86,7 @@ export const education = [
 export const experience = [
   {
     company: 'CAM Supply Inc.',
-    role: 'Engineering Intern',
+    role: 'Technical Product & Marketing Intern',
     location: 'Lake Elsinore, CA',
     // Update this string if the range changes. `current` drives the pulsing
     // "Current" tag, so clear it once the end date has passed.
@@ -97,7 +97,7 @@ export const experience = [
       'Generated engineering drawings with dimensions, tolerances, and manufacturing specifications to support production and quality control.',
       'Reviewed and updated product documentation to maintain compliance with regulatory and quality requirements, including FDA product records.',
       'Conducted cost-benefit analyses of U.S. and Chinese manufacturing partners, evaluating labor, material, logistics, and production costs to support sourcing decisions.',
-      'Produced user guides, brochures, and marketing materials in CorelDraw to support product documentation.',
+      'Designed user guides, brochures, product labels, and marketing collateral in CorelDraw.',
     ],
   },
   {
@@ -193,7 +193,7 @@ export const skills = [
   {
     group: 'Platforms',
     items: [
-      'SolidWorks',
+      'SolidWorks (CSWA)',
       'LabVIEW',
       'Arduino IDE',
       'MATLAB',
