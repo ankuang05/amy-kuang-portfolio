@@ -37,29 +37,6 @@ export const bio = {
   ],
 }
 
-/**
- * Headline numbers pulled from the Niagara Bottling internship. Shown at the
- * top of the Experience page so the quantified results are read before the
- * bullets that explain them.
- */
-export const metrics = [
-  {
-    value: '420,800',
-    unit: 'bottles',
-    label: 'Added production capacity per peak period',
-  },
-  {
-    value: '12%',
-    unit: '17 → 15 min',
-    label: 'Faster pack changeover via SMED',
-  },
-  {
-    value: '0.139%',
-    unit: 'OEE',
-    label: 'Throughput efficiency gain',
-  },
-]
-
 /** Hero backgrounds, played in order and looped forever. */
 export const VIDEOS = [
   'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260629_030107_874273ea-684a-4e90-bb96-8fdfde48d53d.mp4',
@@ -114,6 +91,25 @@ export const experience = [
       'Applied SMED principles to reduce average pack changeover time by 12% (17 → 15 min), directly improving OEE and resulting in a 0.139% throughput efficiency gain.',
       'Standardized MES fault codes and implemented automated aggregate unit tracking to support Root Cause Corrective Action (RCCA) investigations.',
       'Collaborated with maintenance, production, and quality teams to troubleshoot line inefficiencies and improve overall operations; developed SOPs for line improvement and factory equipment to improve repeatability.',
+    ],
+    // Quantified results, shown under this role's bullets. Any job can carry
+    // them; leave the key off and nothing is rendered.
+    metrics: [
+      {
+        value: '420,800',
+        unit: 'bottles',
+        label: 'Added production capacity per peak period',
+      },
+      {
+        value: '12%',
+        unit: '17 → 15 min',
+        label: 'Faster pack changeover via SMED',
+      },
+      {
+        value: '0.139%',
+        unit: 'OEE',
+        label: 'Throughput efficiency gain',
+      },
     ],
   },
 ]
