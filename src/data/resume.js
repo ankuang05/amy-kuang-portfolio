@@ -136,13 +136,10 @@ export const projects = [
     sponsor: 'Sponsor: Honeywell International, Inc. · Colorado School of Mines',
     location: 'Golden, CO',
     tags: ['DED', 'Aerospace', 'Multi-material'],
-    bullets: [
-      'Researched feasibility of embedding functional thermocouples and strain gauges within structural components using a novel multi-material Directed Energy Deposition (DED) process, serving as proof of concept for embedded sensing in aerospace structures.',
-      'Developed a hybrid powder deposition technique to safely fuse LPBF-grade Cu and CuNi30 powders using DED laser remelting within stainless-steel channels, resolving an airborne particulate explosion risk identified mid-project.',
-      'Translated Honeywell customer requirements into ASTM-compliant coupon designs, drafted test plans, qualification procedures, and a final design report with recommended next steps for future DED system acquisitions.',
-    ],
-    // A first-person note under the bullets, in Amy's own words. Each string is
-    // its own paragraph. Optional — a project without `summary` renders none.
+    // No bullets here — the note below carries this one on its own.
+    bullets: [],
+    // A first-person note in Amy's own words. Each string is its own
+    // paragraph. Optional — a project without `summary` renders none.
     summary: [
       'Wrapping up a year-long senior capstone project at Colorado School of Mines.',
       'Our team partnered with Honeywell to explore embedding functional thermocouples and strain gauges directly into structural components using a novel multi-material Directed Energy Deposition (DED) process. Throughout the project, we developed a hybrid powder deposition method for copper-based materials, translated customer requirements into ASTM-compliant qualification plans and test coupons, and evaluated the feasibility of integrating sensors into additively manufactured components.',

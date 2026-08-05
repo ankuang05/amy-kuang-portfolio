@@ -98,6 +98,10 @@ export function EntryRow({ index, meta, children, delay = 0 }) {
 }
 
 export function Bullets({ items }) {
+  // An entry can carry no bullets at all; render nothing rather than an empty
+  // list, which would still push its top margin into whatever follows.
+  if (!items?.length) return null
+
   return (
     <ul className="mt-5 flex flex-col gap-3">
       {items.map((item, i) => (
