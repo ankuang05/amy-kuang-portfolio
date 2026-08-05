@@ -30,6 +30,27 @@ function Media({ src, alt, index }) {
   )
 }
 
+/**
+ * A longer note in Amy's own voice, under the bullets. Set narrower than the
+ * column: prose wants a shorter measure than a bulleted line does.
+ */
+function Summary({ paragraphs }) {
+  if (!paragraphs?.length) return null
+
+  return (
+    <div className="mt-7 flex max-w-[620px] flex-col gap-4">
+      {paragraphs.map((text, i) => (
+        <p
+          key={i}
+          className="text-sm font-normal leading-6 tracking-[-0.14px] opacity-75"
+        >
+          {text}
+        </p>
+      ))}
+    </div>
+  )
+}
+
 function Links({ items }) {
   if (!items?.length) return null
 
@@ -105,6 +126,7 @@ export default function Projects({ onNavigate }) {
               />
 
               <Bullets items={project.bullets} />
+              <Summary paragraphs={project.summary} />
               <Links items={project.links} />
             </EntryRow>
           )
