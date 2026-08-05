@@ -135,7 +135,7 @@ export const projects = [
     context: 'Senior Capstone Research Project',
     sponsor: 'Sponsor: Honeywell International, Inc. · Colorado School of Mines',
     location: 'Golden, CO',
-    tags: ['DED', 'Aerospace', 'Multi-material'],
+    tags: ['DED', 'Multi-material'],
     // No bullets here — the note below carries this one on its own.
     bullets: [],
     // A first-person note in Amy's own words. Each string is its own
