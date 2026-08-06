@@ -212,7 +212,21 @@ export const projects = [
   },
   {
     title: 'Finite Element Analysis of a Double Wishbone Suspension System',
-    figures: [],
+    // A pair, set up as the collage so both keep their own proportions — the
+    // shared 4:3 box a plain pair would use crops the top and bottom off a
+    // near-square plot. Widths are set so the two come out level.
+    figureLayout: 'collage',
+    figureColumns: '1fr 1.11fr',
+    figures: [
+      {
+        src: '/projects/fea-loads-restraints.png',
+        alt: 'The double wishbone assembly in SolidWorks with loads and restraints applied: green restraint arrows at the bushing bores, purple force arrows on the upright, and a coil-over between the control arms.',
+      },
+      {
+        src: '/projects/fea-von-mises.png',
+        alt: 'Static nodal von Mises stress plot of the same assembly, scaled to 30.68 ksi, with the peak at a lower control arm mounting lug.',
+      },
+    ],
     links: [],
     period: 'December 2024',
     context: 'Structural optimization study',

@@ -77,10 +77,10 @@ function Figure({ figure, frame = 'ratio', className = '' }) {
  * drops to a stack only on a phone, and any third figure wraps by itself.
  *
  * `layout: 'collage'` builds two stacked columns instead: the last two pictures
- * on the right, everything before them on the left. It splits at 640px, wide
- * enough that four pictures are still worth looking at and narrow enough to
- * hold through the 800px window `auto-fit` was chosen to survive. Below that
- * they simply stack in order, left column first.
+ * on the right, everything before them on the left — so a plain pair comes out
+ * one each. It splits at 640px, wide enough that four pictures are still worth
+ * looking at and narrow enough to hold through the 800px window `auto-fit` was
+ * chosen to survive. Below that they simply stack in order, left column first.
  *
  * Every picture keeps its own proportions — these are CAD views and plots,
  * where a crop takes out a colour bar or an axis. Nothing is forced to a shared
@@ -129,7 +129,7 @@ function Media({ figures, index, layout, columns }) {
     )
   }
 
-  if (layout === 'collage' && figures.length > 2) {
+  if (layout === 'collage' && figures.length > 1) {
     return <Collage figures={figures} columns={columns} />
   }
 
