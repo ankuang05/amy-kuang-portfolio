@@ -24,7 +24,7 @@ export const bio = {
   lines: [
     {
       lead: 'Studied',
-      rest: 'Mechanical Engineering at Colorado School of Mines & Aerospace Engineering at UC Irvine',
+      rest: 'Mechanical Engineering at Colorado School of Mines | Mechanical and Aerospace Engineering at UC Irvine',
     },
     {
       lead: 'Curious',
