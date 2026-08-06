@@ -173,7 +173,7 @@ export const projects = [
     tags: ['FEA', 'Optimization', 'Structures'],
     bullets: [],
     summary: [
-      'A class project where I ran a finite element analysis on a double wishbone suspension system, with the goal of taking as much mass out of the components as I could while still holding to safety factor standards. I looked at how stress distributed under a range of loading conditions to make sure the design would stay reliable under high-performance use, and documented the trade-offs and validation results that came out of it.',
+      'A class project where a partner and I ran a finite element analysis on a double wishbone suspension system, with the goal of taking as much mass out of the components as we could while still holding to safety factor standards. We looked at how stress distributed under a range of loading conditions to make sure the design would stay reliable under high-performance use, and documented the trade-offs and validation results that came out of it.',
     ],
   },
   {
