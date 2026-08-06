@@ -132,6 +132,12 @@ export const experience = [
  *               href    — makes the figure a link, e.g. to the full-size PDF.
  *             One figure runs the full column; two share a row and drop to a
  *             stack on phones.
+ *   figureLayout — 'collage' instead builds two stacked columns: the last two
+ *             pictures on the right, everything before them on the left. Needs
+ *             three or more; ignored otherwise.
+ *   figureColumns — the collage's column widths, any grid-template-columns
+ *             value ('1fr 2fr'). Tune it so both columns end up the same
+ *             height; upright pictures need a narrower column than wide ones.
  *   links   — [{ label, href }]. Reports, repos, papers, videos. Leave [] to
  *             hide the row entirely.
  */
@@ -170,7 +176,30 @@ export const projects = [
   },
   {
     title: 'Powder Flow Characterization for Electrodynamic DED Feeders',
-    figures: [],
+    // Read as a collage: the two CAD views on the left, the two analysis views
+    // on the right. The column widths look lopsided written down — they are set
+    // so the columns come out level, since the CAD views are upright and the
+    // plots are wide. Retune them if these pictures change.
+    figureLayout: 'collage',
+    figureColumns: '1fr 2fr',
+    figures: [
+      {
+        src: '/projects/powder-flow-cad-body.png',
+        alt: 'SolidWorks isometric of the powder metering body: a long channel running between two mounting blocks drilled for fasteners.',
+      },
+      {
+        src: '/projects/powder-flow-cad-channel.png',
+        alt: 'SolidWorks isometric of the channel on its own, a slender open-topped rail with a bore through one end.',
+      },
+      {
+        src: '/projects/powder-flow-boundary-conditions.png',
+        alt: 'The flow domain with its boundary conditions marked: velocity inlet at the left in blue, outlets along the top and right in red.',
+      },
+      {
+        src: '/projects/powder-flow-velocity.png',
+        alt: 'Velocity magnitude contour through the channel, peaking around 2.26 m/s in a fast core near the inlet that spreads and slows toward the outlet.',
+      },
+    ],
     links: [],
     period: 'Jan 2026 – May 2026',
     context: 'Graduate Research Project — AMFG 501: Additive Manufacturing',

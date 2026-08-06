@@ -2,40 +2,55 @@ import SectionShell, { Bullets, EntryRow, Meta } from '../components/SectionShel
 import { projects } from '../data/resume'
 
 /**
- * One picture and its caption.
+ * One picture and its caption. `frame` decides how the picture meets its box:
  *
- * Every frame is the same 4:3 box, so figures sharing a row are the same size
- * whatever their contents. That shape is the poster's own, which is why
- * `contain` fills it edge to edge here rather than letterboxing — the setting
- * is kept as insurance, so a poster is never cropped if its proportions turn
- * out not to match. Only a `cover` figure grows on hover; there is nothing to
- * reveal inside a picture that is already whole.
+ *   'ratio'   — a fixed 4:3 box, so figures sharing a row come out the same
+ *               size whatever their contents. 4:3 is the poster's own shape,
+ *               which is why a `contain` figure fills it edge to edge rather
+ *               than letterboxing; the setting is kept as insurance so a poster
+ *               is never cropped if its proportions turn out not to match.
+ *   'natural' — no box at all; the picture keeps its own proportions. For
+ *               diagrams and plots, where a crop would take out an axis or a
+ *               colour bar and there is nothing to gain by matching a
+ *               neighbour's height.
+ *
+ * Only a picture that is being cropped anyway grows on hover; there is nothing
+ * to reveal inside one that is already whole.
  */
-function Figure({ figure }) {
+function Figure({ figure, frame = 'ratio', className = '' }) {
   const { src, alt, caption, fit = 'cover', href } = figure
-  const contain = fit === 'contain'
+  const contain = frame !== 'ratio' || fit === 'contain'
 
-  const frame = (
-    <div className="aspect-[4/3] w-full overflow-hidden border border-white/12 bg-white/[0.04]">
+  const box = (
+    <div
+      className={`w-full overflow-hidden border border-white/12 bg-white/[0.04] ${
+        { ratio: 'aspect-[4/3]', natural: '' }[frame]
+      }`}
+    >
       <img
         src={src}
         alt={alt}
         loading="lazy"
-        className={`h-full w-full transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          contain ? 'object-contain' : 'object-cover group-hover:scale-[1.04]'
-        }`}
+        className={`w-full transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          { ratio: 'h-full', natural: 'h-auto' }[frame]
+        } ${contain ? 'object-contain' : 'object-cover group-hover:scale-[1.04]'}`}
       />
     </div>
   )
 
   return (
-    <figure className="group">
+    <figure className={`group flex flex-col ${className}`}>
       {href ? (
-        <a href={href} target="_blank" rel="noreferrer noopener" className="block">
-          {frame}
+        <a
+          href={href}
+          target="_blank"
+          rel="noreferrer noopener"
+          className="flex min-h-0 flex-1 flex-col"
+        >
+          {box}
         </a>
       ) : (
-        frame
+        box
       )}
       {caption ? (
         <figcaption className="mt-3 text-[10px] font-medium uppercase leading-3 tracking-[-0.1px] opacity-60">
@@ -60,8 +75,39 @@ function Figure({ figure }) {
  * window, room enough for two, so a viewport rule would stack pictures that sit
  * side by side comfortably. `auto-fit` keeps them paired down to ~540px and
  * drops to a stack only on a phone, and any third figure wraps by itself.
+ *
+ * `layout: 'collage'` builds two stacked columns instead: the last two pictures
+ * on the right, everything before them on the left. It splits at 640px, wide
+ * enough that four pictures are still worth looking at and narrow enough to
+ * hold through the 800px window `auto-fit` was chosen to survive. Below that
+ * they simply stack in order, left column first.
+ *
+ * Every picture keeps its own proportions — these are CAD views and plots,
+ * where a crop takes out a colour bar or an axis. Nothing is forced to a shared
+ * height, so the two columns are levelled by their widths instead: see
+ * `figureColumns` in resume.js, which is tuned to the pictures it sits with.
  */
-function Media({ figures, index }) {
+function Collage({ figures, columns = '1fr 1fr' }) {
+  const split = Math.max(1, figures.length - 2)
+  const sides = [figures.slice(0, split), figures.slice(split)]
+
+  return (
+    <div
+      className="mt-7 grid gap-5 sm:grid-cols-[var(--figure-columns)]"
+      style={{ '--figure-columns': columns }}
+    >
+      {sides.map((side, i) => (
+        <div key={i} className="flex flex-col gap-5">
+          {side.map((figure) => (
+            <Figure key={figure.src} figure={figure} frame="natural" />
+          ))}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function Media({ figures, index, layout, columns }) {
   if (!figures?.length) {
     return (
       <div className="mt-7 flex aspect-[16/9] w-full max-w-[560px] items-end border border-white/12 bg-white/[0.04] p-5">
@@ -73,6 +119,10 @@ function Media({ figures, index }) {
         </span>
       </div>
     )
+  }
+
+  if (layout === 'collage' && figures.length > 2) {
+    return <Collage figures={figures} columns={columns} />
   }
 
   const single = figures.length === 1
@@ -181,7 +231,12 @@ export default function Projects({ onNavigate }) {
                 </p>
               ) : null}
 
-              <Media figures={project.figures} index={index} />
+              <Media
+                figures={project.figures}
+                layout={project.figureLayout}
+                columns={project.figureColumns}
+                index={index}
+              />
 
               <Bullets items={project.bullets} />
               <Summary paragraphs={project.summary} />
