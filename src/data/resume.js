@@ -28,7 +28,7 @@ export const bio = {
     },
     {
       lead: 'Curious',
-      rest: 'About Manufacturing, Aerospace Systems & Product Development',
+      rest: 'About Manufacturing, Systems & Product Development',
     },
     {
       lead: 'Career Background',
