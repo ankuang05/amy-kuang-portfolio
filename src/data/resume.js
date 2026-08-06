@@ -146,6 +146,11 @@ export const projects = [
         fit: 'contain',
         href: '/projects/layered-labs-poster.pdf',
       },
+      {
+        src: '/projects/copper-nickel-trace.jpg',
+        alt: 'A copper-nickel trace deposited as four parallel beads on a stainless steel bar, next to machined test tabs.',
+        caption: 'Copper Nickel Trace',
+      },
     ],
     links: [],
     period: 'Aug 2025 – May 2026',

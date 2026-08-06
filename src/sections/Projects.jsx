@@ -4,21 +4,19 @@ import { projects } from '../data/resume'
 /**
  * One picture and its caption.
  *
- * A `contain` figure is padded off the frame edge: letterboxing a poster hard
- * against the border reads as a mistake, a margin reads as a mount. Only a
- * `cover` figure grows on hover — there is nothing to reveal inside a picture
- * that is already whole.
+ * Every frame is the same 4:3 box, so figures sharing a row are the same size
+ * whatever their contents. That shape is the poster's own, which is why
+ * `contain` fills it edge to edge here rather than letterboxing — the setting
+ * is kept as insurance, so a poster is never cropped if its proportions turn
+ * out not to match. Only a `cover` figure grows on hover; there is nothing to
+ * reveal inside a picture that is already whole.
  */
 function Figure({ figure }) {
   const { src, alt, caption, fit = 'cover', href } = figure
   const contain = fit === 'contain'
 
   const frame = (
-    <div
-      className={`aspect-[16/10] w-full overflow-hidden border border-white/12 bg-white/[0.04] ${
-        contain ? 'p-3' : ''
-      }`}
-    >
+    <div className="aspect-[4/3] w-full overflow-hidden border border-white/12 bg-white/[0.04]">
       <img
         src={src}
         alt={alt}
