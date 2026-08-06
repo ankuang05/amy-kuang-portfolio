@@ -13,6 +13,9 @@ import { projects } from '../data/resume'
  *               diagrams and plots, where a crop would take out an axis or a
  *               colour bar and there is nothing to gain by matching a
  *               neighbour's height.
+ *   'fill'    — natural until the collage splits at 640px, then takes the
+ *               height of the column beside it and centres the picture inside.
+ *               For a column holding one picture against a stack of two.
  *
  * Only a picture that is being cropped anyway grows on hover; there is nothing
  * to reveal inside one that is already whole.
@@ -24,7 +27,7 @@ function Figure({ figure, frame = 'ratio', className = '' }) {
   const box = (
     <div
       className={`w-full overflow-hidden border border-white/12 bg-white/[0.04] ${
-        { ratio: 'aspect-[4/3]', natural: '' }[frame]
+        { ratio: 'aspect-[4/3]', natural: '', fill: 'min-h-0 flex-1' }[frame]
       }`}
     >
       <img
@@ -32,7 +35,7 @@ function Figure({ figure, frame = 'ratio', className = '' }) {
         alt={alt}
         loading="lazy"
         className={`w-full transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          { ratio: 'h-full', natural: 'h-auto' }[frame]
+          { ratio: 'h-full', natural: 'h-auto', fill: 'h-auto sm:h-full' }[frame]
         } ${contain ? 'object-contain' : 'object-cover group-hover:scale-[1.04]'}`}
       />
     </div>
@@ -84,8 +87,11 @@ function Figure({ figure, frame = 'ratio', className = '' }) {
  *
  * Every picture keeps its own proportions — these are CAD views and plots,
  * where a crop takes out a colour bar or an axis. Nothing is forced to a shared
- * height, so the two columns are levelled by their widths instead: see
- * `figureColumns` in resume.js, which is tuned to the pictures it sits with.
+ * height, so the columns are levelled by their widths instead: see
+ * `figureColumns` in resume.js, which is tuned to the pictures it sits with. A
+ * column holding a single picture takes the other's height and mats it, since
+ * width alone cannot always level a lone wide picture against a tall stack
+ * without shrinking that stack past reading size.
  */
 function Collage({ figures, columns = '1fr 1fr' }) {
   const split = Math.max(1, figures.length - 2)
@@ -99,7 +105,12 @@ function Collage({ figures, columns = '1fr 1fr' }) {
       {sides.map((side, i) => (
         <div key={i} className="flex flex-col gap-5">
           {side.map((figure) => (
-            <Figure key={figure.src} figure={figure} frame="natural" />
+            <Figure
+              key={figure.src}
+              figure={figure}
+              frame={side.length === 1 ? 'fill' : 'natural'}
+              className={side.length === 1 ? 'flex-1' : ''}
+            />
           ))}
         </div>
       ))}
