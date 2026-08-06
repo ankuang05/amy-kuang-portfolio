@@ -185,7 +185,7 @@ export const projects = [
     context: 'Closed-loop electro-mechanical control system',
     sponsor: '',
     location: '',
-    tags: ['LabVIEW', 'PID', 'Electronics'],
+    tags: ['LabVIEW', 'PID', 'Instrumentation + Automation'],
     bullets: [],
     summary: [
       'The challenge was to build a miniature oven out of cardboard and aluminum foil that could hold a steady 350°F, steady enough to actually bake a cookie. A partner and I ran thermocouple feedback into LabVIEW, drove the heating elements through a MOSFET circuit, and built a custom UI for tuning PID gains against live waveform charts. Most of the work was in the integration: getting the software logic and the analog hardware to agree, then testing whether a cardboard box could really hold temperature.',
