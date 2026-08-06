@@ -177,23 +177,26 @@ export const projects = [
   {
     title: 'Powder Flow Characterization for Electrodynamic DED Feeders',
     // Read as a collage: the CAD on the left, the two analysis views stacked on
-    // the right. Levelling by width alone would squeeze the plots down to
-    // ~215px, too small to read a colour bar, so the split stops at 1.9fr and
-    // the CAD is matted to the difference instead.
+    // the right. Levelling the columns by width would put the plots at ~195px,
+    // too small to read; this leans the other way instead and lets the CAD
+    // centre itself against the taller stack.
     figureLayout: 'collage',
-    figureColumns: '1.9fr 1fr',
+    figureColumns: '1.25fr 1fr',
     figures: [
       {
         src: '/projects/powder-flow-cad.png',
         alt: 'Two SolidWorks views of the powder metering channel: an isometric of the full body with its mounting blocks, and the channel on its own.',
+        caption: 'Changes Made to Create Simplified Geometry for CFD',
       },
       {
         src: '/projects/powder-flow-boundary-conditions.png',
         alt: 'The flow domain with its boundary conditions marked: velocity inlet at the left in blue, outlets along the top and right in red.',
+        caption: 'Boundary Conditions on Simplified Geometry',
       },
       {
         src: '/projects/powder-flow-velocity.png',
         alt: 'Velocity magnitude contour through the channel, peaking around 2.26 m/s in a fast core near the inlet that spreads and slows toward the outlet.',
+        caption: 'Modeling of the Argon gas: Contours of Velocity Magnitude [m/s]',
       },
     ],
     links: [],
