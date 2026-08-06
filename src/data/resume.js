@@ -243,7 +243,29 @@ export const projects = [
   },
   {
     title: 'PID-Controlled Easy Bake Oven',
-    figures: [],
+    // The LabVIEW screens on the left, the bench photos on the right. Two
+    // stacked portraits run tall against two wide screenshots, so the split is
+    // steep: it is what brings the columns level.
+    figureLayout: 'collage',
+    figureColumns: '2.7fr 1fr',
+    figures: [
+      {
+        src: '/projects/oven-block-diagram.png',
+        alt: 'The LabVIEW block diagram: a thermocouple read on Dev1/ai1 converted to °F, compared against a set point, through a PID block and a PWM duty-cycle node to the analog output, with a safe shutdown writing zero on stop.',
+      },
+      {
+        src: '/projects/oven-front-panel.png',
+        alt: 'The LabVIEW front panel: KP 10, KI 0.25, KD 0, a set point of 350, and a waveform chart holding a flat line at 350°F above a noisier trace near zero.',
+      },
+      {
+        src: '/projects/oven-bench.jpg',
+        alt: 'The oven on the lab bench: a cardboard box taped with foil and blue tape, a two-pin connector on top, wired back to a bench supply, with the thermal resistance calculations and the running VI on the monitor behind it.',
+      },
+      {
+        src: '/projects/oven-cookie.jpg',
+        alt: 'The oven opened to show its foil-lined interior, with the baked cookie in a foil tin on the bench in front of it.',
+      },
+    ],
     links: [],
     period: 'Nov 2024 – Dec 2024',
     context: 'Closed-loop electro-mechanical control system',
