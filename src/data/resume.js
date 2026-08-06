@@ -176,20 +176,15 @@ export const projects = [
   },
   {
     title: 'Powder Flow Characterization for Electrodynamic DED Feeders',
-    // Read as a collage: the two CAD views on the left, the two analysis views
-    // on the right. The column widths look lopsided written down — they are set
-    // so the columns come out level, since the CAD views are upright and the
-    // plots are wide. Retune them if these pictures change.
+    // Read as a collage: the CAD on the left, the two analysis views stacked on
+    // the right. The column widths are set so both columns come out level —
+    // one upright picture against two wide ones. Retune if these change.
     figureLayout: 'collage',
-    figureColumns: '1fr 2fr',
+    figureColumns: '1.29fr 1fr',
     figures: [
       {
         src: '/projects/powder-flow-cad-body.png',
         alt: 'SolidWorks isometric of the powder metering body: a long channel running between two mounting blocks drilled for fasteners.',
-      },
-      {
-        src: '/projects/powder-flow-cad-channel.png',
-        alt: 'SolidWorks isometric of the channel on its own, a slender open-topped rail with a bore through one end.',
       },
       {
         src: '/projects/powder-flow-boundary-conditions.png',
