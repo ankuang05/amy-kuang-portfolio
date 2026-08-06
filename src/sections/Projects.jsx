@@ -74,9 +74,13 @@ function Links({ items }) {
 }
 
 export default function Projects({ onNavigate }) {
-  // No kicker: the projects themselves cover the ground it summarised.
   return (
-    <SectionShell id="projects" eyebrow="Selected work" onNavigate={onNavigate}>
+    <SectionShell
+      id="projects"
+      eyebrow="Selected work"
+      onNavigate={onNavigate}
+      kicker="A folder of things I've worked on, some for school and some on my own."
+    >
       <div className="border-b border-white/15">
         {projects.map((project, i) => {
           const index = String(i + 1).padStart(2, '0')
