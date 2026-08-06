@@ -171,9 +171,9 @@ export const projects = [
     sponsor: '',
     location: '',
     tags: ['FEA', 'Optimization', 'Structures'],
-    bullets: [
-      'Conducted comprehensive Finite Element Analysis (FEA) to perform a static optimization study minimizing component mass while adhering to safety factor standards.',
-      'Evaluated stress distribution and placement under various loading conditions to ensure reliability in high-performance environments; generated technical documentation summarizing trade-offs and validation results.',
+    bullets: [],
+    summary: [
+      'A class project where I ran a finite element analysis on a double wishbone suspension system, with the goal of taking as much mass out of the components as I could while still holding to safety factor standards. I looked at how stress distributed under a range of loading conditions to make sure the design would stay reliable under high-performance use, and documented the trade-offs and validation results that came out of it.',
     ],
   },
   {
