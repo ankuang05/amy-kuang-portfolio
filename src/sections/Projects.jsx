@@ -89,12 +89,15 @@ function Figure({ figure, frame = 'ratio', className = '' }) {
  *
  * Width cannot always level a lone wide picture against a stack without
  * shrinking that stack past reading size, so a column holding one picture
- * centres it against the other rather than stretching to match. Empty page
- * above and below reads better than a band of dead space inside its border.
+ * against a stack centres it rather than stretching to match. Empty page above
+ * and below reads better than a band of dead space inside its border. One
+ * picture each is left to hang from the top instead: captions of different
+ * lengths would otherwise slide the two pictures out of line with each other.
  */
 function Collage({ figures, columns = '1fr 1fr' }) {
   const split = Math.max(1, figures.length - 2)
   const sides = [figures.slice(0, split), figures.slice(split)]
+  const uneven = sides[0].length !== sides[1].length
 
   return (
     <div
@@ -104,7 +107,9 @@ function Collage({ figures, columns = '1fr 1fr' }) {
       {sides.map((side, i) => (
         <div
           key={i}
-          className={`flex flex-col gap-5 ${side.length === 1 ? 'justify-center' : ''}`}
+          className={`flex flex-col gap-5 ${
+            uneven && side.length === 1 ? 'justify-center' : ''
+          }`}
         >
           {side.map((figure) => (
             <Figure key={figure.src} figure={figure} frame="natural" />

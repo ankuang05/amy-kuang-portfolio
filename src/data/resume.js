@@ -221,10 +221,13 @@ export const projects = [
       {
         src: '/projects/fea-loads-restraints.png',
         alt: 'The double wishbone assembly in SolidWorks with loads and restraints applied: green restraint arrows at the bushing bores, purple force arrows on the upright, and a coil-over between the control arms.',
+        caption: 'Isometric View of the Suspension System with Fixtures and Forces',
       },
       {
         src: '/projects/fea-von-mises.png',
         alt: 'Static nodal von Mises stress plot of the same assembly, scaled to 30.68 ksi, with the peak at a lower control arm mounting lug.',
+        caption:
+          'von Mises Stress Snapshot with the Location of the Maximum Stress Value on the Lower Suspension Arm',
       },
     ],
     links: [],
