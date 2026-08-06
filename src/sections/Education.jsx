@@ -7,7 +7,7 @@ export default function Education({ onNavigate }) {
       id="education"
       eyebrow="Degrees"
       onNavigate={onNavigate}
-      kicker="A mechanical engineering foundation focused on manufacturing, now specialising in fluid dynamics and propulsion at the graduate level."
+      kicker="A mechanical engineering foundation focused on manufacturing, now specialising in autonomous and intelligent machines at the graduate level."
     >
       <div className="border-b border-white/15">
         {education.map((school, i) => (

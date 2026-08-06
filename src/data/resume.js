@@ -51,7 +51,7 @@ export const education = [
     period: 'M.Eng. May 2027',
     location: 'Irvine, CA',
     details: [
-      { label: 'Major area', value: 'Fluid Dynamics and Propulsion' },
+      { label: 'Focus', value: 'Autonomous and Intelligent Machines & Systems' },
     ],
   },
   {
