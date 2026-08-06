@@ -117,19 +117,36 @@ export const experience = [
 ]
 
 /**
- * Every project takes an optional `image` and any number of `links`.
+ * Every project takes any number of `figures` and any number of `links`.
  *
- *   image     — path to a file in public/projects/ (e.g. '/projects/ded.jpg').
- *               Leave '' and a numbered placeholder plate is drawn instead.
- *   imageAlt  — describe what the picture shows; required whenever image is set.
- *   links     — [{ label, href }]. Reports, repos, papers, videos. Leave [] to
- *               hide the row entirely.
+ *   figures — pictures, in the order they should read across the row. Leave []
+ *             and a numbered placeholder plate is drawn instead. Each takes:
+ *               src     — a file in public/projects/ (e.g. '/projects/ded.jpg').
+ *                         Aim for ~1600px wide; anything under ~1200px is soft
+ *                         on a retina screen.
+ *               alt     — what the picture shows, for anyone who can't see it.
+ *               caption — the line printed underneath. Optional.
+ *               fit     — 'cover' (default) fills the frame and crops; use
+ *                         'contain' for anything that must be read whole, like
+ *                         a poster.
+ *               href    — makes the figure a link, e.g. to the full-size PDF.
+ *             One figure runs the full column; two share a row and drop to a
+ *             stack on phones.
+ *   links   — [{ label, href }]. Reports, repos, papers, videos. Leave [] to
+ *             hide the row entirely.
  */
 export const projects = [
   {
     title: 'Embedded Electronics in Additively Manufactured Components',
-    image: '',
-    imageAlt: '',
+    figures: [
+      {
+        src: '/projects/layered-labs-poster.jpg',
+        alt: 'Layered Labs capstone design poster: project statement, design criteria, strain gauge and thermocouple calculations, copper trace parameter testing, material properties and testing results.',
+        caption: 'Layered Labs Design Poster',
+        fit: 'contain',
+        href: '/projects/layered-labs-poster.pdf',
+      },
+    ],
     links: [],
     period: 'Aug 2025 – May 2026',
     context: 'Senior Capstone Research Project',
@@ -148,8 +165,7 @@ export const projects = [
   },
   {
     title: 'Powder Flow Characterization for Electrodynamic DED Feeders',
-    image: '',
-    imageAlt: '',
+    figures: [],
     links: [],
     period: 'Jan 2026 – May 2026',
     context: 'Graduate Research Project — AMFG 501: Additive Manufacturing',
@@ -163,8 +179,7 @@ export const projects = [
   },
   {
     title: 'Finite Element Analysis of a Double Wishbone Suspension System',
-    image: '',
-    imageAlt: '',
+    figures: [],
     links: [],
     period: 'December 2024',
     context: 'Structural optimization study',
@@ -178,8 +193,7 @@ export const projects = [
   },
   {
     title: 'PID-Controlled Easy Bake Oven',
-    image: '',
-    imageAlt: '',
+    figures: [],
     links: [],
     period: 'Nov 2024 – Dec 2024',
     context: 'Closed-loop electro-mechanical control system',

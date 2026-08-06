@@ -2,30 +2,94 @@ import SectionShell, { Bullets, EntryRow, Meta } from '../components/SectionShel
 import { projects } from '../data/resume'
 
 /**
+ * One picture and its caption.
+ *
+ * A `contain` figure is padded off the frame edge: letterboxing a poster hard
+ * against the border reads as a mistake, a margin reads as a mount. Only a
+ * `cover` figure grows on hover — there is nothing to reveal inside a picture
+ * that is already whole.
+ */
+function Figure({ figure }) {
+  const { src, alt, caption, fit = 'cover', href } = figure
+  const contain = fit === 'contain'
+
+  const frame = (
+    <div
+      className={`aspect-[16/10] w-full overflow-hidden border border-white/12 bg-white/[0.04] ${
+        contain ? 'p-3' : ''
+      }`}
+    >
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        className={`h-full w-full transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          contain ? 'object-contain' : 'object-cover group-hover:scale-[1.04]'
+        }`}
+      />
+    </div>
+  )
+
+  return (
+    <figure className="group">
+      {href ? (
+        <a href={href} target="_blank" rel="noreferrer noopener" className="block">
+          {frame}
+        </a>
+      ) : (
+        frame
+      )}
+      {caption ? (
+        <figcaption className="mt-3 text-[10px] font-medium uppercase leading-3 tracking-[-0.1px] opacity-60">
+          {caption}
+          {href ? <span aria-hidden="true"> ↗</span> : null}
+        </figcaption>
+      ) : null}
+    </figure>
+  )
+}
+
+/**
  * Project artwork. Until a file is dropped into `public/projects/` and wired up
  * in `resume.js`, this draws a numbered plate — a deliberate placeholder rather
- * than a gap, so the layout is already the right shape when the image lands.
+ * than a gap, so the layout is already the right shape when the picture lands.
+ *
+ * One figure is held to the width a single picture wants; a pair opens up to
+ * the full column so neither half ends up a stamp.
+ *
+ * The pair splits on the space actually there rather than on the viewport —
+ * under the `mobile` breakpoint this row is still 754px wide at an 800px
+ * window, room enough for two, so a viewport rule would stack pictures that sit
+ * side by side comfortably. `auto-fit` keeps them paired down to ~540px and
+ * drops to a stack only on a phone, and any third figure wraps by itself.
  */
-function Media({ src, alt, index }) {
+function Media({ figures, index }) {
+  if (!figures?.length) {
+    return (
+      <div className="mt-7 flex aspect-[16/9] w-full max-w-[560px] items-end border border-white/12 bg-white/[0.04] p-5">
+        <span
+          aria-hidden="true"
+          className="text-[clamp(44px,7vw,76px)] font-medium leading-[0.8] tracking-[-0.04em] text-white/12"
+        >
+          {index}
+        </span>
+      </div>
+    )
+  }
+
+  const single = figures.length === 1
+
   return (
-    <div className="group mt-7 aspect-[16/9] w-full max-w-[560px] overflow-hidden border border-white/12 bg-white/[0.04]">
-      {src ? (
-        <img
-          src={src}
-          alt={alt}
-          loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
-        />
-      ) : (
-        <div className="flex h-full w-full items-end p-5">
-          <span
-            aria-hidden="true"
-            className="text-[clamp(44px,7vw,76px)] font-medium leading-[0.8] tracking-[-0.04em] text-white/12"
-          >
-            {index}
-          </span>
-        </div>
-      )}
+    <div
+      className={`mt-7 grid gap-5 ${
+        single
+          ? 'max-w-[560px] grid-cols-1'
+          : 'grid-cols-[repeat(auto-fit,minmax(260px,1fr))]'
+      }`}
+    >
+      {figures.map((figure) => (
+        <Figure key={figure.src} figure={figure} />
+      ))}
     </div>
   )
 }
@@ -119,11 +183,7 @@ export default function Projects({ onNavigate }) {
                 </p>
               ) : null}
 
-              <Media
-                src={project.image}
-                alt={project.imageAlt}
-                index={index}
-              />
+              <Media figures={project.figures} index={index} />
 
               <Bullets items={project.bullets} />
               <Summary paragraphs={project.summary} />
