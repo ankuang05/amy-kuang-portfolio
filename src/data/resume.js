@@ -170,7 +170,7 @@ export const projects = [
     context: 'Structural optimization study',
     sponsor: '',
     location: '',
-    tags: ['FEA', 'Optimization', 'Structures'],
+    tags: ['FEA', 'SolidWorks', 'Optimization'],
     bullets: [],
     summary: [
       'A class project where I ran a finite element analysis on a double wishbone suspension system, with the goal of taking as much mass out of the components as I could while still holding to safety factor standards. I looked at how stress distributed under a range of loading conditions to make sure the design would stay reliable under high-performance use, and documented the trade-offs and validation results that came out of it.',
