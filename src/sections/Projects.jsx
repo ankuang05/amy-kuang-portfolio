@@ -53,7 +53,7 @@ function Figure({ figure, frame = 'ratio', className = '' }) {
         box
       )}
       {caption ? (
-        <figcaption className="mt-3 text-[10px] font-medium uppercase leading-3 tracking-[-0.1px] opacity-60">
+        <figcaption className="mt-3 text-center text-[10px] font-medium uppercase leading-3 tracking-[-0.1px] opacity-60">
           {caption}
           {href ? <span aria-hidden="true"> ↗</span> : null}
         </figcaption>
