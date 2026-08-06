@@ -158,7 +158,7 @@ export const projects = [
     tags: ['CFD', 'Ansys Fluent', 'Multiphase'],
     bullets: [],
     summary: [
-      "Another project that I've been a part of focused on understanding powder flow behavior in DED systems. Using Ansys Fluent CFD alongside transparent-flow experiments, our team looked at how powder moves through a DED powder metering system and identified stagnation zones that contribute to particle settling and feed instability!",
+      "Another project that I've been a part of focused on understanding powder flow behavior in DED systems. Using Ansys Fluent CFD alongside transparent-flow experiments, our team looked at how powder moves through a DED powder metering system and identified stagnation zones that contribute to particle settling and feed instability. Along the way we ran into a gap in the multiphase CFD workflow itself: particle tracking kept going numerically unstable in multi-outlet geometries, with no established boundary condition guidelines to work from, so we proposed CFD-DEM coupling as a path forward.",
     ],
   },
   {
