@@ -156,10 +156,9 @@ export const projects = [
     sponsor: 'Colorado School of Mines',
     location: 'Golden, CO',
     tags: ['CFD', 'Ansys Fluent', 'Multiphase'],
-    bullets: [
-      'Investigated powder flow stability in DED systems using combined CFD modeling and transparent-geometry experimental imaging to characterize carrier gas behavior and particle transport in a novel electrodynamic feeder.',
-      'Modeled argon carrier gas flow through a multi-outlet powder diffuser in Ansys Fluent and identified low-velocity stagnation zones near outlet regions as probable sites for particle settling and feed instability.',
-      'Identified a critical gap in multiphase CFD workflows where DPM particle tracking became numerically unstable in multi-outlet geometries due to absent boundary condition guidelines; proposed CFD-DEM coupling as a path forward.',
+    bullets: [],
+    summary: [
+      "Another project that I've been a part of focused on understanding powder flow behavior in DED systems. Using Ansys Fluent CFD alongside transparent-flow experiments, our team looked at how powder moves through a DED powder metering system and identified stagnation zones that contribute to particle settling and feed instability!",
     ],
   },
   {
