@@ -1,18 +1,17 @@
 import Reveal from './Reveal'
 import { bio, profile } from '../data/resume'
 
-export default function Hero() {
+export default function Hero({ hinting = true }) {
   // The exclamation mark carries the accent colour, doing the job the pink full
   // stop does on every section title.
   const [greetingHead, ...rest] = bio.greeting.split('!')
   const greetingTail = rest.join('!')
 
   return (
-    <main className="relative z-[2] h-screen w-full">
+    <section id="home" aria-label="Home" className="relative h-screen w-full">
       <div className="mx-auto flex h-full w-full max-w-[1340px] flex-col items-end justify-end px-[15px] pt-[190px] md-tablet:px-[18px] md-tablet:pt-[150px] mobile:items-start mobile:px-[18px] mobile:pt-[140px]">
         {/* Name + intro + CTA */}
-        <section
-          aria-label="Introduction"
+        <div
           className="flex w-full items-end pb-[60px] md-tablet:gap-7 md-tablet:pb-[52px] mobile:flex-col mobile:items-start mobile:gap-8 mobile:pb-11"
         >
           <div className="flex-[2]">
@@ -57,8 +56,21 @@ export default function Hero() {
               </a>
             </Reveal>
           </div>
-        </section>
+        </div>
       </div>
-    </main>
+
+      {/* Says "this page goes down" without saying anything: a dot falling
+          down a hairline, on a loop. It fades out as soon as the hint has been
+          taken, so it never sits there repeating itself over a page someone is
+          already scrolling. */}
+      <div
+        aria-hidden="true"
+        className={`pointer-events-none absolute inset-x-0 bottom-4 flex justify-center transition-opacity duration-700 ${
+          hinting ? 'opacity-100' : 'opacity-0'
+        }`}
+      >
+        <span className="scroll-hint" />
+      </div>
+    </section>
   )
 }

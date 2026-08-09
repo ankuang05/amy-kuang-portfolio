@@ -34,11 +34,11 @@ function Results({ items }) {
   )
 }
 
-export default function Experience({ onNavigate }) {
+export default function Experience() {
   // No kicker: the roles speak for themselves. SectionShell drops the column
   // entirely when one isn't given.
   return (
-    <SectionShell id="experience" eyebrow="Internships" onNavigate={onNavigate}>
+    <SectionShell id="experience" eyebrow="Internships">
       <div className="border-b border-white/15">
         {experience.map((job, i) => (
           <EntryRow
@@ -67,9 +67,9 @@ export default function Experience({ onNavigate }) {
               </>
             }
           >
-            <h2 className="text-[40px] font-medium uppercase leading-[92%] tracking-[-1.6px] md-tablet:text-[32px] mobile:text-[28px] mobile:tracking-[-1px]">
+            <h3 className="text-[40px] font-medium uppercase leading-[92%] tracking-[-1.6px] md-tablet:text-[32px] mobile:text-[28px] mobile:tracking-[-1px]">
               {job.role}
-            </h2>
+            </h3>
             <p className="mt-3 text-sm font-medium uppercase leading-4 tracking-[-0.14px] opacity-60">
               {job.company}
             </p>

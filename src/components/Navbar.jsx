@@ -23,17 +23,19 @@ function useClock() {
 
 const indexLabel = (i) => String(i + 1).padStart(2, '0')
 
-export default function Navbar({ view, onNavigate, scrolled }) {
+/**
+ * Every section lives on the one page now, so these are plain anchors: the
+ * browser does the scrolling — smoothly, or instantly for anyone who has asked
+ * for less motion, both set in index.css — and back/forward move between
+ * sections without a line of script.
+ */
+export default function Navbar({ active, scrolled }) {
   const [open, setOpen] = useState(false)
   const time = useClock()
 
-  // Close the mobile panel whenever the view changes.
-  useEffect(() => setOpen(false), [view])
-
-  const go = (id) => {
-    setOpen(false)
-    onNavigate(id)
-  }
+  // Close the mobile panel once the section being read has changed, which is
+  // the tap having landed.
+  useEffect(() => setOpen(false), [active])
 
   return (
     <header
@@ -49,28 +51,25 @@ export default function Navbar({ view, onNavigate, scrolled }) {
         <div className="flex items-start justify-between gap-6">
           {/* Left: wordmark + section nav */}
           <div className="flex items-start gap-10 md-tablet:gap-6">
-            <button
-              type="button"
-              onClick={() => go('home')}
+            <a
+              href="#home"
               className="nav-link-underline text-xs font-semibold uppercase leading-4 tracking-[-0.12px] text-white"
-              data-active={view === 'home'}
+              data-active={active === 'home'}
             >
               {profile.firstName} {profile.lastName}
-            </button>
+            </a>
 
             <nav aria-label="Sections" className="mobile:hidden">
               <ul className="flex items-start gap-7 md-tablet:gap-4">
                 {navSections.map((section, i) => {
-                  const active = view === section.id
+                  const current = active === section.id
                   return (
                     <li key={section.id}>
-                      <button
-                        type="button"
-                        onClick={() => go(section.id)}
-                        aria-label={section.label}
-                        aria-current={active ? 'page' : undefined}
+                      <a
+                        href={`#${section.id}`}
+                        aria-current={current ? 'true' : undefined}
                         className={`role-link flex items-start gap-1.5 transition-opacity duration-300 ${
-                          active ? 'opacity-100' : 'opacity-70 hover:opacity-100'
+                          current ? 'opacity-100' : 'opacity-70 hover:opacity-100'
                         }`}
                       >
                         <span className="mt-[1px] text-[8px] font-medium uppercase leading-3 tracking-[-0.08px]">
@@ -78,11 +77,11 @@ export default function Navbar({ view, onNavigate, scrolled }) {
                         </span>
                         <span
                           className="nav-link-underline text-xs font-medium uppercase leading-4 tracking-[-0.12px]"
-                          data-active={active}
+                          data-active={current}
                         >
                           {section.label}
                         </span>
-                      </button>
+                      </a>
                     </li>
                   )
                 })}
@@ -129,10 +128,9 @@ export default function Navbar({ view, onNavigate, scrolled }) {
               <ul className="flex flex-col gap-4">
                 {navSections.map((section, i) => (
                   <li key={section.id}>
-                    <button
-                      type="button"
-                      onClick={() => go(section.id)}
-                      aria-label={section.label}
+                    <a
+                      href={`#${section.id}`}
+                      onClick={() => setOpen(false)}
                       className="flex items-start gap-2 text-left"
                     >
                       <span className="mt-2 text-[8px] font-medium uppercase leading-3 tracking-[-0.08px] opacity-60">
@@ -140,12 +138,12 @@ export default function Navbar({ view, onNavigate, scrolled }) {
                       </span>
                       <span
                         className={`text-[28px] font-medium uppercase leading-8 tracking-[-0.84px] ${
-                          view === section.id ? 'opacity-100' : 'opacity-70'
+                          active === section.id ? 'opacity-100' : 'opacity-70'
                         }`}
                       >
                         {section.label}
                       </span>
-                    </button>
+                    </a>
                   </li>
                 ))}
               </ul>

@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import VideoBackground from './components/VideoBackground'
-import PageTransition, { PHASE_MS } from './components/PageTransition'
+import SectionRail from './components/SectionRail'
 import Experience from './sections/Experience'
 import Education from './sections/Education'
 import Projects from './sections/Projects'
@@ -10,121 +10,114 @@ import Skills from './sections/Skills'
 import Contact from './sections/Contact'
 import { profile, sections, VIDEOS } from './data/resume'
 
-const VIEWS = {
-  experience: Experience,
-  education: Education,
-  projects: Projects,
-  skills: Skills,
-  contact: Contact,
-}
+/**
+ * How far down the hero the background gives way. Two thresholds rather than
+ * one: the footage darkens a third of the way through the hero and only
+ * brightens again near the very top, so a scroll parked on the line cannot
+ * flicker the two states against each other.
+ */
+const DARKEN_AT = 0.3
+const BRIGHTEN_AT = 0.15
 
-/** How long the panels sit fully closed before the new view is swapped in. */
-const HOLD_MS = 140
-
-const validView = (id) => (sections.some((s) => s.id === id) ? id : 'home')
-const hashView = () =>
-  validView(decodeURIComponent(window.location.hash.replace(/^#/, '')))
+/** Roughly the navbar's height — where a section counts as the one being read. */
+const READING_LINE = 140
 
 export default function App() {
-  const [view, setView] = useState(hashView)
-  const [target, setTarget] = useState(view)
-  const [phase, setPhase] = useState('idle')
-  const [activeIndex, setActiveIndex] = useState(0)
+  const [active, setActive] = useState(sections[0].id)
+  const [atHero, setAtHero] = useState(true)
   const [scrolled, setScrolled] = useState(false)
+  const [activeIndex, setActiveIndex] = useState(0)
 
-  const timers = useRef([])
-  const busy = useRef(false)
-  const viewRef = useRef(view)
+  // Mirrors `atHero` for the hysteresis test above, which has to read the
+  // current value during a scroll frame rather than the one this render closed
+  // over.
+  const heroRef = useRef(true)
 
   useEffect(() => {
-    viewRef.current = view
-  }, [view])
+    let frame = 0
 
-  // Tearing down pending timers must also release the guard, otherwise an
-  // interrupted transition would leave navigation permanently blocked.
-  useEffect(
-    () => () => {
-      timers.current.forEach(clearTimeout)
-      timers.current = []
-      busy.current = false
-    },
-    []
-  )
+    const measure = () => {
+      frame = 0
+      const y = window.scrollY
+      const vh = window.innerHeight
 
-  const navigate = useCallback((next, { push = true } = {}) => {
-    const id = validView(next)
-    if (busy.current || id === viewRef.current) return
+      setScrolled(y > 24)
 
-    busy.current = true
-    setTarget(id)
-    setPhase('covering')
+      const wasHero = heroRef.current
+      const nowHero = y < vh * (wasHero ? DARKEN_AT : BRIGHTEN_AT)
+      if (nowHero !== wasHero) {
+        heroRef.current = nowHero
+        setAtHero(nowHero)
+      }
 
-    if (push) {
-      window.history.pushState({ view: id }, '', `#${id}`)
+      // The section being read is the last one whose top has passed under the
+      // navbar — not the one taking up the most screen, which would skip a
+      // short section entirely on a fast scroll.
+      const line = y + READING_LINE
+      let current = sections[0].id
+      for (const section of sections) {
+        const el = document.getElementById(section.id)
+        if (el && el.getBoundingClientRect().top + y <= line) {
+          current = section.id
+        }
+      }
+      setActive(current)
     }
 
-    timers.current.push(
-      setTimeout(() => {
-        setView(id)
-        window.scrollTo(0, 0)
-        setPhase('revealing')
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(measure)
+    }
 
-        timers.current.push(
-          setTimeout(() => {
-            setPhase('idle')
-            busy.current = false
-          }, PHASE_MS)
-        )
-      }, PHASE_MS + HOLD_MS)
-    )
-  }, [])
-
-  // Back / forward buttons replay the transition without re-pushing history.
-  useEffect(() => {
-    const onPopState = () => navigate(hashView(), { push: false })
-    window.addEventListener('popstate', onPopState)
-    return () => window.removeEventListener('popstate', onPopState)
-  }, [navigate])
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24)
-    onScroll()
+    measure()
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    window.addEventListener('resize', onScroll)
+    return () => {
+      if (frame) cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
+  }, [])
+
+  // Opening the page on #projects: the browser looks for that anchor before
+  // React has drawn anything and gives up. Once the sections exist, jump again.
+  useEffect(() => {
+    const id = decodeURIComponent(window.location.hash.replace(/^#/, ''))
+    if (!sections.some((s) => s.id === id)) return
+    document.getElementById(id)?.scrollIntoView({ behavior: 'auto' })
   }, [])
 
   useEffect(() => {
-    const label = sections.find((s) => s.id === view)?.label
+    const label = sections.find((s) => s.id === active)?.label
     document.title =
-      view === 'home'
+      active === 'home'
         ? `${profile.firstName} ${profile.lastName} — ${profile.title}`
         : `${label} — ${profile.firstName} ${profile.lastName}`
-  }, [view])
-
-  const Section = VIEWS[view]
+  }, [active])
 
   return (
-    <div className="relative min-h-screen w-full">
+    <div className="relative w-full">
       <VideoBackground
         activeIndex={activeIndex}
-        autoCycle={view === 'home'}
+        autoCycle={atHero}
         onCycle={() =>
           setActiveIndex((current) => (current + 1) % VIDEOS.length)
         }
-        overlay={view === 'home' ? 'bg-black/20' : 'bg-black/[0.88]'}
-        scrim={view === 'home'}
-        blur={view !== 'home'}
+        overlay={atHero ? 'bg-black/20' : 'bg-black/[0.88]'}
+        scrim={atHero}
+        blur={!atHero}
       />
 
-      <Navbar view={view} onNavigate={navigate} scrolled={scrolled} />
+      <Navbar active={active} scrolled={scrolled} />
+      <SectionRail active={active} visible={!atHero} />
 
-      {view === 'home' ? (
-        <Hero />
-      ) : (
-        <Section onNavigate={navigate} />
-      )}
-
-      <PageTransition phase={phase} target={target} />
+      <main className="relative z-[2] w-full">
+        <Hero hinting={atHero} />
+        <Experience />
+        <Projects />
+        <Education />
+        <Skills />
+        <Contact />
+      </main>
     </div>
   )
 }

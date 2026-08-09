@@ -103,6 +103,21 @@ body {
   }
 }
 
+@keyframes scrollHint {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  25%,
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(28px);
+    opacity: 0;
+  }
+}
+
 @keyframes labelIn {
   from {
     opacity: 0;
@@ -145,6 +160,32 @@ body {
 
 .dot-pulse {
   animation: dotPulse 1.6s ease-in-out infinite;
+}
+
+/* Scroll hint: a hairline that fades out downwards, with an accent dot
+   falling down it. The line alone still reads as "there is more below" for
+   anyone who has asked for less motion, where the dot is stopped. */
+.scroll-hint {
+  position: relative;
+  display: block;
+  width: 1px;
+  height: 34px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.4),
+    rgba(255, 255, 255, 0)
+  );
+}
+.scroll-hint::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -1px;
+  height: 3px;
+  width: 3px;
+  border-radius: 999px;
+  background: var(--accent);
+  animation: scrollHint 2.4s var(--ease-spring) infinite;
 }
 
 /* ---------------------------------------------------------------- *

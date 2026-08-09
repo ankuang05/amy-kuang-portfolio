@@ -13,9 +13,9 @@ const channels = [
   { label: 'Based in', value: profile.location, href: null },
 ]
 
-export default function Contact({ onNavigate }) {
+export default function Contact() {
   return (
-    <SectionShell id="contact" eyebrow="Get in touch" onNavigate={onNavigate}>
+    <SectionShell id="contact" eyebrow="Get in touch">
       <div className="grid grid-cols-12 gap-8 border-y border-white/15 py-12 md-tablet:gap-5 mobile:flex mobile:flex-col mobile:gap-8 mobile:py-10">
         <div className="col-span-7 md-tablet:col-span-8">
           <Reveal variant="up" className="flex items-center gap-5 mobile:gap-4">

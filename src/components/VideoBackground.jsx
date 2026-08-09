@@ -103,15 +103,22 @@ export default function VideoBackground({
         />
       ))}
 
-      <div className={`absolute inset-0 z-[1] ${overlay}`} />
+      <div
+        className={`absolute inset-0 z-[1] transition-colors duration-[900ms] ease-in-out ${overlay}`}
+      />
 
-      {/* Keeps white type legible over bright footage without flattening it */}
-      {scrim ? (
-        <>
-          <div className="absolute inset-x-0 top-0 z-[1] h-[240px] bg-gradient-to-b from-black/80 via-black/35 to-transparent" />
-          <div className="absolute inset-x-0 bottom-0 z-[1] h-[64%] bg-gradient-to-t from-black/92 via-black/50 to-transparent" />
-        </>
-      ) : null}
+      {/* Keeps white type legible over bright footage without flattening it.
+          Always mounted, faded rather than removed: scrolling off the hero
+          takes the scrim away over the same beat as the blur, where dropping
+          it outright would snap the top of the page a shade lighter. */}
+      <div
+        className={`absolute inset-0 z-[1] transition-opacity duration-[900ms] ease-in-out ${
+          scrim ? 'opacity-100' : 'opacity-0'
+        }`}
+      >
+        <div className="absolute inset-x-0 top-0 h-[240px] bg-gradient-to-b from-black/80 via-black/35 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-[64%] bg-gradient-to-t from-black/92 via-black/50 to-transparent" />
+      </div>
     </div>
   )
 }

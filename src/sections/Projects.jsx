@@ -198,12 +198,11 @@ function Links({ items }) {
   )
 }
 
-export default function Projects({ onNavigate }) {
+export default function Projects() {
   return (
     <SectionShell
       id="projects"
       eyebrow="Selected work"
-      onNavigate={onNavigate}
       kicker="A folder of things I've worked on, some for school and some on my own."
     >
       <div className="border-b border-white/15">
@@ -232,9 +231,9 @@ export default function Projects({ onNavigate }) {
                 </>
               }
             >
-              <h2 className="max-w-[620px] text-[34px] font-medium uppercase leading-[96%] tracking-[-1.3px] md-tablet:text-[28px] mobile:text-[24px] mobile:tracking-[-0.8px]">
+              <h3 className="max-w-[620px] text-[34px] font-medium uppercase leading-[96%] tracking-[-1.3px] md-tablet:text-[28px] mobile:text-[24px] mobile:tracking-[-0.8px]">
                 {project.title}
-              </h2>
+              </h3>
               <p className="mt-4 text-sm font-medium leading-5 tracking-[-0.14px] opacity-70">
                 {project.context}
               </p>

@@ -1,12 +1,11 @@
 import SectionShell, { EntryRow, Meta } from '../components/SectionShell'
 import { education } from '../data/resume'
 
-export default function Education({ onNavigate }) {
+export default function Education() {
   return (
     <SectionShell
       id="education"
       eyebrow="Degrees"
-      onNavigate={onNavigate}
       kicker="A mechanical engineering foundation focused on manufacturing, now specialising in autonomous and intelligent machines at the graduate level."
     >
       <div className="border-b border-white/15">
@@ -22,9 +21,9 @@ export default function Education({ onNavigate }) {
               </>
             }
           >
-            <h2 className="text-[40px] font-medium uppercase leading-[92%] tracking-[-1.6px] md-tablet:text-[32px] mobile:text-[28px] mobile:tracking-[-1px]">
+            <h3 className="text-[40px] font-medium uppercase leading-[92%] tracking-[-1.6px] md-tablet:text-[32px] mobile:text-[28px] mobile:tracking-[-1px]">
               {school.school}
-            </h2>
+            </h3>
             <p className="mt-4 text-base font-medium leading-6 tracking-[-0.16px] opacity-80">
               {school.degree}
             </p>
