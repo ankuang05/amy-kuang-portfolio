@@ -4,12 +4,12 @@ import { projects } from '../data/resume'
 /**
  * One picture and its caption. `frame` decides how the picture meets its box:
  *
- *   'ratio'   — a fixed 4:3 box, so figures sharing a row come out the same
+ *   'ratio'   - a fixed 4:3 box, so figures sharing a row come out the same
  *               size whatever their contents. 4:3 is the poster's own shape,
  *               which is why a `contain` figure fills it edge to edge rather
  *               than letterboxing; the setting is kept as insurance so a poster
  *               is never cropped if its proportions turn out not to match.
- *   'natural' — no box at all; the picture keeps its own proportions. For
+ *   'natural' - no box at all; the picture keeps its own proportions. For
  *               diagrams and plots, where a crop would take out an axis or a
  *               colour bar and there is nothing to gain by matching a
  *               neighbour's height.
@@ -64,25 +64,25 @@ function Figure({ figure, frame = 'ratio', className = '' }) {
 
 /**
  * Project artwork. Until a file is dropped into `public/projects/` and wired up
- * in `resume.js`, this draws a numbered plate — a deliberate placeholder rather
+ * in `resume.js`, this draws a numbered plate - a deliberate placeholder rather
  * than a gap, so the layout is already the right shape when the picture lands.
  *
  * One figure is held to the width a single picture wants; a pair opens up to
  * the full column so neither half ends up a stamp.
  *
- * The pair splits on the space actually there rather than on the viewport —
+ * The pair splits on the space actually there rather than on the viewport -
  * under the `mobile` breakpoint this row is still 754px wide at an 800px
  * window, room enough for two, so a viewport rule would stack pictures that sit
  * side by side comfortably. `auto-fit` keeps them paired down to ~540px and
  * drops to a stack only on a phone, and any third figure wraps by itself.
  *
  * `layout: 'collage'` builds two stacked columns instead: the last two pictures
- * on the right, everything before them on the left — so a plain pair comes out
+ * on the right, everything before them on the left - so a plain pair comes out
  * one each. It splits at 640px, wide enough that four pictures are still worth
  * looking at and narrow enough to hold through the 800px window `auto-fit` was
  * chosen to survive. Below that they simply stack in order, left column first.
  *
- * Every picture keeps its own proportions — these are CAD views and plots,
+ * Every picture keeps its own proportions - these are CAD views and plots,
  * where a crop takes out a colour bar or an axis. Nothing is forced to a shared
  * height, so the columns are levelled by their widths instead: see
  * `figureColumns` in resume.js, which is tuned to the pictures it sits with.

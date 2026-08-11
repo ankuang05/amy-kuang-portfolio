@@ -51,7 +51,7 @@ export default function Hero({ hinting = true }) {
                 className="fill-button inline-flex items-center gap-2 border border-white px-6 py-3 text-xs font-medium leading-4 tracking-[-0.12px]"
               >
                 Get In Touch
-                {/* Decorative — the link text already says where it goes. */}
+                {/* Decorative - the link text already says where it goes. */}
                 <span aria-hidden="true">→</span>
               </a>
             </Reveal>

@@ -15,7 +15,7 @@ const NAME_MS = 1900
  * where they have got to. The name fades up on arrival and fades out again a
  * couple of seconds later, so what stays on screen is five short rules.
  *
- * The rules are links as well as markers — hovering one names it — so the rail
+ * The rules are links as well as markers - hovering one names it - so the rail
  * doubles as a way to jump without ever showing more than one word at a time.
  *
  * Hidden below 640px: a phone has no spare gutter to give it, and the menu is

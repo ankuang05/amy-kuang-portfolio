@@ -6,7 +6,7 @@ import { sections } from '../data/resume'
  * optional kicker beside it, then the section's own rows.
  *
  * All six sections are stacked in one scrolling document, so the space between
- * them lives here — padding above and below each one rather than a screen-height
+ * them lives here - padding above and below each one rather than a screen-height
  * minimum. A minimum would leave a short section, Education or Contact, sitting
  * in a pool of empty page.
  *
@@ -15,7 +15,7 @@ import { sections } from '../data/resume'
  * it instead of tucked underneath.
  *
  * The gutters sit inside the centred column, not outside it, so a section's
- * first character lines up with the navbar's — which is centred the same way.
+ * first character lines up with the navbar's - which is centred the same way.
  * The right one is wider from 640px up: that is the reading rail's lane, and
  * it is written as `pr` on its own because a `px` shorthand in the max-width
  * variants would win the cascade and hand the lane straight back.
@@ -83,7 +83,7 @@ export default function SectionShell({
  * Shared row scaffold: index · body · right-aligned meta.
  *
  * A row with nothing in its meta column gives the space back to the body
- * rather than leaving a third of the width empty — Skills, whose chips read
+ * rather than leaving a third of the width empty - Skills, whose chips read
  * better across a wide measure, is the case that needs it.
  */
 export function EntryRow({ index, meta, children, delay = 0 }) {

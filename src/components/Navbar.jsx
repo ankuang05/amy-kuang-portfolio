@@ -1,37 +1,16 @@
 import { useEffect, useState } from 'react'
 import { navSections, profile } from '../data/resume'
 
-function useClock() {
-  const [time, setTime] = useState('--:--:--')
-
-  useEffect(() => {
-    const formatter = new Intl.DateTimeFormat('en-GB', {
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-      hour12: false,
-      timeZone: profile.timezone,
-    })
-    const tick = () => setTime(formatter.format(new Date()))
-    tick()
-    const id = setInterval(tick, 1000)
-    return () => clearInterval(id)
-  }, [])
-
-  return time
-}
-
 const indexLabel = (i) => String(i + 1).padStart(2, '0')
 
 /**
  * Every section lives on the one page now, so these are plain anchors: the
- * browser does the scrolling — smoothly, or instantly for anyone who has asked
- * for less motion, both set in index.css — and back/forward move between
+ * browser does the scrolling - smoothly, or instantly for anyone who has asked
+ * for less motion, both set in index.css - and back/forward move between
  * sections without a line of script.
  */
 export default function Navbar({ active, scrolled }) {
   const [open, setOpen] = useState(false)
-  const time = useClock()
 
   // Close the mobile panel once the section being read has changed, which is
   // the tap having landed.
@@ -97,13 +76,6 @@ export default function Navbar({ active, scrolled }) {
             >
               {profile.email}
             </a>
-            <span
-              className="text-xs font-medium uppercase leading-4 tracking-[-0.12px] tabular-nums opacity-70 mobile:hidden"
-              aria-label="Local time"
-            >
-              {profile.timezoneLabel} {time}
-            </span>
-
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
@@ -116,7 +88,7 @@ export default function Navbar({ active, scrolled }) {
           </div>
         </div>
 
-        {/* Mobile panel — grid-rows trick keeps the collapse smooth */}
+        {/* Mobile panel - grid-rows trick keeps the collapse smooth */}
         <div
           id="mobile-nav"
           className={`hidden overflow-hidden transition-[grid-template-rows] duration-[420ms] ease-[var(--ease-spring)] mobile:grid ${

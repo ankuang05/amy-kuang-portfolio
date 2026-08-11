@@ -3,8 +3,6 @@ export const profile = {
   lastName: 'Kuang',
   email: 'amy6kuang@gmail.com',
   location: 'Riverside, CA',
-  timezone: 'America/Los_Angeles',
-  timezoneLabel: 'PST',
   linkedin: 'https://www.linkedin.com/in/kuanga',
   linkedinLabel: 'linkedin.com/in/kuanga',
   title: 'Mechanical & Aerospace Engineer',
@@ -94,7 +92,7 @@ export const experience = [
     ],
     // Quantified results, shown as one row under this role's bullets. Any job
     // can carry them; leave the key off and nothing is rendered. Keep `label`
-    // to ~30 characters — all three share a line, so a longer one wraps on
+    // to ~30 characters - all three share a line, so a longer one wraps on
     // narrower screens.
     metrics: [
       {
@@ -119,26 +117,26 @@ export const experience = [
 /**
  * Every project takes any number of `figures` and any number of `links`.
  *
- *   figures — pictures, in the order they should read across the row. Leave []
+ *   figures - pictures, in the order they should read across the row. Leave []
  *             and a numbered placeholder plate is drawn instead. Each takes:
- *               src     — a file in public/projects/ (e.g. '/projects/ded.jpg').
+ *               src     - a file in public/projects/ (e.g. '/projects/ded.jpg').
  *                         Aim for ~1600px wide; anything under ~1200px is soft
  *                         on a retina screen.
- *               alt     — what the picture shows, for anyone who can't see it.
- *               caption — the line printed underneath. Optional.
- *               fit     — 'cover' (default) fills the frame and crops; use
+ *               alt     - what the picture shows, for anyone who can't see it.
+ *               caption - the line printed underneath. Optional.
+ *               fit     - 'cover' (default) fills the frame and crops; use
  *                         'contain' for anything that must be read whole, like
  *                         a poster.
- *               href    — makes the figure a link, e.g. to the full-size PDF.
+ *               href    - makes the figure a link, e.g. to the full-size PDF.
  *             One figure runs the full column; two share a row and drop to a
  *             stack on phones.
- *   figureLayout — 'collage' instead builds two stacked columns: the last two
+ *   figureLayout - 'collage' instead builds two stacked columns: the last two
  *             pictures on the right, everything before them on the left. Needs
  *             three or more; ignored otherwise.
- *   figureColumns — the collage's column widths, any grid-template-columns
+ *   figureColumns - the collage's column widths, any grid-template-columns
  *             value ('1fr 2fr'). Tune it so both columns end up the same
  *             height; upright pictures need a narrower column than wide ones.
- *   links   — [{ label, href }]. Reports, repos, papers, videos. Leave [] to
+ *   links   - [{ label, href }]. Reports, repos, papers, videos. Leave [] to
  *             hide the row entirely.
  */
 export const projects = [
@@ -164,10 +162,10 @@ export const projects = [
     sponsor: 'Sponsor: Honeywell International, Inc. · Colorado School of Mines',
     location: 'Golden, CO',
     tags: ['DED', 'Multi-material'],
-    // No bullets here — the note below carries this one on its own.
+    // No bullets here - the note below carries this one on its own.
     bullets: [],
     // A first-person note in Amy's own words. Each string is its own
-    // paragraph. Optional — a project without `summary` renders none.
+    // paragraph. Optional - a project without `summary` renders none.
     summary: [
       'Wrapping up a year-long senior capstone project at Colorado School of Mines.',
       'Our team partnered with Honeywell to explore embedding functional thermocouples and strain gauges directly into structural components using a novel multi-material Directed Energy Deposition (DED) process. Throughout the project, we developed a hybrid powder deposition method for copper-based materials, translated customer requirements into ASTM-compliant qualification plans and test coupons, and evaluated the feasibility of integrating sensors into additively manufactured components.',
@@ -201,7 +199,7 @@ export const projects = [
     ],
     links: [],
     period: 'Jan 2026 – May 2026',
-    context: 'Graduate Research Project — AMFG 501: Additive Manufacturing',
+    context: 'Graduate Research Project - AMFG 501: Additive Manufacturing',
     sponsor: 'Colorado School of Mines',
     location: 'Golden, CO',
     tags: ['CFD', 'Ansys Fluent', 'Multiphase Modeling'],
@@ -212,7 +210,7 @@ export const projects = [
   },
   {
     title: 'Finite Element Analysis of a Double Wishbone Suspension System',
-    // A pair, set up as the collage so both keep their own proportions — the
+    // A pair, set up as the collage so both keep their own proportions - the
     // shared 4:3 box a plain pair would use crops the top and bottom off a
     // near-square plot. Widths are set so the two come out level.
     figureLayout: 'collage',
@@ -331,5 +329,5 @@ export const sections = [
   { id: 'contact', label: 'Contact' },
 ]
 
-/** Nav omits Home — the wordmark handles that. */
+/** Nav omits Home - the wordmark handles that. */
 export const navSections = sections.filter((s) => s.id !== 'home')

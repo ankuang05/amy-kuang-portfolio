@@ -19,7 +19,7 @@ import { profile, sections, VIDEOS } from './data/resume'
 const DARKEN_AT = 0.3
 const BRIGHTEN_AT = 0.15
 
-/** Roughly the navbar's height — where a section counts as the one being read. */
+/** Roughly the navbar's height - where a section counts as the one being read. */
 const READING_LINE = 140
 
 export default function App() {
@@ -51,7 +51,7 @@ export default function App() {
       }
 
       // The section being read is the last one whose top has passed under the
-      // navbar — not the one taking up the most screen, which would skip a
+      // navbar - not the one taking up the most screen, which would skip a
       // short section entirely on a fast scroll.
       const line = y + READING_LINE
       let current = sections[0].id
@@ -90,8 +90,8 @@ export default function App() {
     const label = sections.find((s) => s.id === active)?.label
     document.title =
       active === 'home'
-        ? `${profile.firstName} ${profile.lastName} — ${profile.title}`
-        : `${label} — ${profile.firstName} ${profile.lastName}`
+        ? `${profile.firstName} ${profile.lastName} - ${profile.title}`
+        : `${label} - ${profile.firstName} ${profile.lastName}`
   }, [active])
 
   return (

@@ -58,7 +58,7 @@ export default function VideoBackground({
     el.play()?.catch(() => {})
 
     // Let the outgoing clip keep moving until the crossfade is over, then stop
-    // it — decoding video nobody can see costs battery for nothing.
+    // it - decoding video nobody can see costs battery for nothing.
     const id = setTimeout(() => {
       els.current.forEach((other, i) => {
         if (i !== shown) other?.pause()

@@ -2,14 +2,14 @@ import SectionShell, { Bullets, EntryRow, Meta } from '../components/SectionShel
 import { experience } from '../data/resume'
 
 /**
- * A role's quantified results, read as one row under its own bullets — each
+ * A role's quantified results, read as one row under its own bullets - each
  * number next to the work that produced it, with its caption beneath.
  *
  * The columns follow the space actually available rather than the viewport:
  * under the `mobile` breakpoint this row is full-width (756px at an 800px
  * window), so a viewport rule would stack three figures that comfortably fit
- * side by side. `auto-fit` keeps all three on one line wherever they fit —
- * down to ~500px, which covers the narrowest tablet column at ~159px each —
+ * side by side. `auto-fit` keeps all three on one line wherever they fit -
+ * down to ~500px, which covers the narrowest tablet column at ~159px each -
  * and only drops one down on a phone.
  */
 function Results({ items }) {

@@ -6,7 +6,7 @@ export default function Skills() {
     <SectionShell
       id="skills"
       eyebrow="Capabilities"
-      kicker="The tools, methods, and working habits behind the projects — from CAD and CFD through to the shop floor."
+      kicker="The tools, methods, and working habits behind the projects - from CAD and CFD through to the shop floor."
     >
       <div className="border-b border-white/15">
         {skills.map((group, i) => (
